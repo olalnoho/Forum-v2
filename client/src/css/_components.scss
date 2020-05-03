@@ -1,0 +1,35 @@
+.container {
+   background-color: $dark-main;
+   display: flex;
+   flex-direction: column;
+   flex: 1;
+}
+
+.wrapper {
+   display: flex;
+   flex-direction: column;
+   margin: 2rem;
+   width: 95%;
+   max-width: 1200px;
+   align-self: center;
+   flex: 1;
+   background-color: $dark-main;
+}
+
+.btn {
+   padding: 1rem 2rem;
+   &--primary {
+      background-color: rgb(67, 100, 73);
+   }
+   &--secondary {
+      background: #99818D;
+   }
+}
+
+.relative {
+   position: relative;
+}
+
+.info-text {
+   color: #888;
+}
