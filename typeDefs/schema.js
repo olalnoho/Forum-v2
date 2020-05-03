@@ -1,10 +1,11 @@
 module.exports = `
    type Query {
-      hello: String!
-      getNumber(num: Int): Int
+      getUserById(id: ID!): User
    }
 
-   type Mutation {
-      getNumber(num: Int): Int
+   type User {
+      id: ID
+      username: String
+      email: String
    }
 `

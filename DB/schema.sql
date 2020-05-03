@@ -28,12 +28,13 @@ CREATE TABLE post (
 
 CREATE TABLE category (
    id INTEGER NOT NULL PRIMARY KEY,
-   title VARCHAR(100) NOT NULL,
-   description VARCHAR(200) NOT NULL
+   title VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE subcategory (
    id INTEGER NOT NULL PRIMARY KEY,
+   title VARCHAR(50) NOT NULL,
    category_id INT NOT NULL,
+   description VARCHAR(200) NOT NULL,
    FOREIGN KEY(category_id) REFERENCES category(id)
 );

@@ -9,15 +9,6 @@ const typeDefs = require('./typeDefs/schema')
 const schema = buildSchema(typeDefs)
 const app = express();
 
-const bcrypt = require('bcryptjs')
-const hashpw = async (pw) => {
-   const h = await bcrypt.hash(pw, 10);
-   console.log(h.length)
-}
-
-hashpw('Hello dude')
-hashpw('Man')
-
 app.use('/graphql',
    graphqlHTTP(req => ({
       schema,
