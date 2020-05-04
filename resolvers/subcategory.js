@@ -1,10 +1,18 @@
-module.exports = {
+const { Thread } = require('./thread')
+
+exports.resolver = {
    async getSubcategoryById({ id }, { db }) {
-      const [sc] = await db('subcategory')
-         .select('*')
-         .where({ id })
-      if (!sc) throw new Error('No subcategory by that id')
-      return new Subcategory(sc, db)
+      try {
+         const [sc] = await db('subcategory')
+            .select('*')
+            .where({ id })
+         if (!sc) throw new Error('No subcategory by that id')
+         return new Subcategory(sc, db)
+
+      } catch (err) {
+         console.log('Error retrieving subcategory')
+         throw new Error(err)
+      }
    }
 }
 
@@ -19,8 +27,11 @@ class Subcategory {
    }
 
    async threads() {
-      return this.db('thread').select('*').where({
+      const thread = await this.db('thread').select('*').where({
          subcategory_id: this.id
       })
+      return thread.map(x => new Thread(x, this.db))
    }
 }
+
+exports.Subcategory = Subcategory

@@ -1,8 +1,9 @@
-module.exports = {
-   async getAllCategories(_, { db }) {
+const { Subcategory } = require('./subcategory')
+exports.resolver = {
+   async getAllCategories(_, ctx) {
       try {
-         const categories = await db('category').select('*')
-         return categories.map(x => new Category(x, db))
+         const categories = await ctx.db('category').select('*')
+         return categories.map(x => new Category(x, ctx))
       } catch (err) {
          console.log('Error retrieving categories')
          throw new Error(err)
@@ -11,20 +12,15 @@ module.exports = {
 }
 
 class Category {
-   constructor(init, db) {
-      this.title = init.title
-      this.id = init.id
-      this.db = db
+   constructor({ title, id }, { db, subcatLoader }) {
+      Object.assign(this, {
+         title, id, db, subcatLoader
+      })
    }
-
    async subcategories() {
-      try {
-         return this.db('subcategory').select('*').where({
-            category_id: this.id
-         })
-      } catch (err) {
-         console.log('Error retrieving sub-categories')
-         throw new Error(err)
-      }
+      return ((await this.subcatLoader.load(this.id)) || [])
+         .map(x => new Subcategory(x, this.db))
    }
 }
+
+exports.Category = Category

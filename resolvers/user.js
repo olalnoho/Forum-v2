@@ -1,4 +1,4 @@
-module.exports = {
+exports.resolver = {
    async getUserById({ id }, { db }) {
       try {
          const [user] = await db('user')
@@ -27,3 +27,5 @@ class User {
       this.id = init.id
    }
 }
+
+exports.User = User

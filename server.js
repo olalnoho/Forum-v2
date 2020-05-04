@@ -6,6 +6,7 @@ const db = require('./DB/connection')
 const root = require('./resolvers/')
 const typeDefs = require('./typeDefs/schema')
 
+const subcatLoader = require('./dataloaders/users')
 
 const schema = buildSchema(typeDefs)
 const app = express();
@@ -22,7 +23,8 @@ app.use('/graphql',
       ...gqlOptions,
       context: {
          req,
-         db
+         db,
+         subcatLoader
       }
    }))
 )

@@ -1,6 +1,7 @@
-const user = require('./user')
-const category = require('./category')
-const subcategory = require('./subcategory')
+const { resolver: user } = require('./user')
+const { resolver: category } = require('./category')
+const { resolver: subcategory } = require('./subcategory')
+
 module.exports = {
    ...user,
    ...category,
