@@ -19,10 +19,7 @@ exports.resolver = {
 class Subcategory {
    constructor({ id, title, description }, db) {
       Object.assign(this, {
-         id,
-         title,
-         description,
-         db
+         id, title, description, db
       })
    }
 

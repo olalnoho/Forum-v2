@@ -1,12 +1,13 @@
 const express = require('express');
 const graphqlHTTP = require('express-graphql');
 const { buildSchema } = require('graphql');
+const DataLoader = require('dataloader')
 
 const db = require('./DB/connection')
 const root = require('./resolvers/')
 const typeDefs = require('./typeDefs/schema')
 
-const subcatLoader = require('./dataloaders/users')
+const subcatLoader = require('./dataloaders/subcategoryLoader')
 
 const schema = buildSchema(typeDefs)
 const app = express();
@@ -24,7 +25,7 @@ app.use('/graphql',
       context: {
          req,
          db,
-         subcatLoader
+         subcatLoader: new DataLoader(subcatLoader)
       }
    }))
 )

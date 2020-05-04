@@ -11,7 +11,7 @@ const db = require('knex')({
 // For debug
 
 db.on('query', data => {
-   console.log(data)
+   // console.log(data)
 })
 
 module.exports = db
