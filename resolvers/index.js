@@ -1,10 +1,6 @@
 const user = require('./user')
-
+const category = require('./category')
 module.exports = {
    ...user,
-   User: {
-      test(){
-         return 'fuck';
-      }
-   }
+   ...category
 }

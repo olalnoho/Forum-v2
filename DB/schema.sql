@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS subcategory;
 
 CREATE TABLE user (
    id INTEGER NOT NULL PRIMARY KEY,
-   username VARCHAR(25) NOT NULL,
+   username VARCHAR(25) NOT NULL UNIQUE,
    password CHAR(60) NOT NULL
 );
 
@@ -15,7 +15,20 @@ CREATE TABLE user (
 CREATE TABLE thread (
    id INTEGER NOT NULL PRIMARY KEY,
    subcategory_id INT NOT NULL,
-   FOREIGN KEY(subcategory_id) REFERENCES subcategory(id)
+   title VARCHAR(100) NOT NULL,
+   content TEXT NOT NULL,
+   started_by INT NOT NULL,
+
+   CONSTRAINT subc_fk
+      FOREIGN KEY(subcategory_id)
+      REFERENCES subcategory(id)
+      ON DELETE CASCADE,
+
+   CONSTRAINT user_fk
+      -- I don't want to delete thread
+      -- with user, probably.
+      FOREIGN KEY(started_by)
+      REFERENCES user(id)
 );
 
 CREATE TABLE post (
@@ -35,5 +48,9 @@ CREATE TABLE subcategory (
    title VARCHAR(50) NOT NULL,
    category_id INT NOT NULL,
    description VARCHAR(200) NOT NULL,
-   FOREIGN KEY(category_id) REFERENCES category(id)
+   
+   CONSTRAINT c_fk
+      FOREIGN KEY(category_id)
+      REFERENCES category(id)
+      ON DELETE CASCADE
 );

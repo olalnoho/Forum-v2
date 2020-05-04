@@ -1,13 +1,20 @@
 module.exports = {
    async getUserById({ id }, { db }) {
-      const [user] = await db('user')
-         .select('username', 'id')
-         .where({
-            id
-         })
-      if (!user)
-         throw new Error('User not found')
-      return new User(user)
+      try {
+         const [user] = await db('user')
+            .select('username', 'id')
+            .where({
+               id
+            })
+
+         if (!user)
+            throw new Error('User not found')
+         return new User(user)
+      
+      } catch (err) {
+         console.log('Error retrieving user')
+         throw new Error(err)
+      }
    }
 }
 

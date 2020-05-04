@@ -1,23 +1,15 @@
 const faker = require('faker')
 const conn = require('./connection')
 
-/*
-   id INTEGER NOT NULL PRIMARY KEY,
-   title VARCHAR(100) NOT NULL,
-   description VARCHAR(200) NOT NULL
-
-*/
-
-const insert = async () => {
-   await conn('category').insert({
-      title: faker.lorem.words(),
-   })
+const insert = async (c) => {
+   await conn('category').insert(c)
 }
 
-const generate = async () => {
-   for(let i = 0; i < 4; i++){
-      await insert()
-   }
+const generate = async (l = 5) => {
+   const c = Array.from({ length: 5 }).map(_ => ({
+      title: faker.lorem.words()
+   }))
+   await insert(c)
 }
 
 module.exports = generate
