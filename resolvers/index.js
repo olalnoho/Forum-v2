@@ -1,5 +1,10 @@
 const user = require('./user')
 
 module.exports = {
-   ...user
+   ...user,
+   User: {
+      test(){
+         return 'fuck';
+      }
+   }
 }

@@ -7,7 +7,6 @@ DROP TABLE IF EXISTS subcategory;
 CREATE TABLE user (
    id INTEGER NOT NULL PRIMARY KEY,
    username VARCHAR(25) NOT NULL,
-   email VARCHAR(200),
    password CHAR(60) NOT NULL
 );
 

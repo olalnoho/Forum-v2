@@ -18,13 +18,6 @@ const generate = async () => {
    for(let i = 0; i < 4; i++){
       await insert()
    }
-   conn.destroy()
-      .then(_ => console.log('Connection closed'))
 }
 
-generate()
-
-// conn.destroy()
-//    .then(x => {
-//       console.log('Connection closed')
-//    })
+module.exports = generate
