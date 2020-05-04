@@ -1,13 +1,13 @@
 const { Thread } = require('./thread')
 
 exports.resolver = {
-   async getSubcategoryById({ id }, { db }) {
+   async getSubcategoryById({ id }, ctx) {
       try {
-         const [sc] = await db('subcategory')
+         const [sc] = await ctx.db('subcategory')
             .select('*')
             .where({ id })
          if (!sc) throw new Error('No subcategory by that id')
-         return new Subcategory(sc, db)
+         return new Subcategory(sc, ctx)
 
       } catch (err) {
          console.log('Error retrieving subcategory')
@@ -17,16 +17,14 @@ exports.resolver = {
 }
 
 class Subcategory {
-   constructor({ id, title, description }, db) {
+   constructor({ id, title, description }, { db, threadLoader }) {
       Object.assign(this, {
-         id, title, description, db
+         id, title, description, db, threadLoader
       })
    }
 
    async threads() {
-      const thread = await this.db('thread').select('*').where({
-         subcategory_id: this.id
-      })
+      const thread = (await this.threadLoader.load(this.id)) || []
       return thread.map(x => new Thread(x, this.db))
    }
 }

@@ -26,10 +26,9 @@ app.use('/graphql',
          req,
          db,
          // This is for category->subcategory relationship
-         subcatLoader: new DataLoader(
-            loader('subcategory', 'category_id')
-         )
-         
+         subcatLoader: new DataLoader(loader('subcategory', 'category_id')),
+         // This is for subcategory->thread relationship
+         threadLoader: new DataLoader(loader('thread', 'subcategory_id'))
       }
    }))
 )
