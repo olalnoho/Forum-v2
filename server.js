@@ -27,4 +27,6 @@ app.use('/graphql',
    }))
 )
 
-app.listen(4000, _ => console.log('Server started on port 4000'))
+app.listen(4000, _ =>
+   console.log('Server started on port 4000')
+)

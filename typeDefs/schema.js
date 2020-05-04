@@ -2,6 +2,7 @@ module.exports = `
    type Query {
       getUserById(id: ID!): User
       getAllCategories: [Category]!
+      getSubcategoryById(id: ID!): Subcategory
    }
 
    type Mutation {
@@ -29,6 +30,7 @@ module.exports = `
       id: ID!
       title: String
       description: String
+      threads: [Thread]!
    }
 
    """
