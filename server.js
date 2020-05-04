@@ -7,7 +7,7 @@ const db = require('./DB/connection')
 const root = require('./resolvers/')
 const typeDefs = require('./typeDefs/schema')
 
-const subcatLoader = require('./dataloaders/subcategoryLoader')
+const loader = require('./dataloaders/loader')
 
 const schema = buildSchema(typeDefs)
 const app = express();
@@ -25,7 +25,11 @@ app.use('/graphql',
       context: {
          req,
          db,
-         subcatLoader: new DataLoader(subcatLoader)
+         // This is for category->subcategory relationship
+         subcatLoader: new DataLoader(
+            loader('subcategory', 'category_id')
+         )
+         
       }
    }))
 )
