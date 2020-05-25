@@ -22,7 +22,7 @@
       background-color: rgb(67, 100, 73);
    }
    &--secondary {
-      background: #99818D;
+      background: #99818d;
    }
 }
 
@@ -32,4 +32,10 @@
 
 .info-text {
    color: #888;
+}
+
+input[type="text"],
+input[type="password"] {
+   font-family: inherit;
+   padding: 0.5rem;
 }

@@ -44,9 +44,9 @@ ul, ol {
 
 button,
 input[type="submit"] {
+   cursor: pointer;
    outline: none;
    border: none;
-   background: inherit;
    color: inherit;
 }
 

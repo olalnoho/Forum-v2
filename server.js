@@ -19,6 +19,9 @@ const gqlOptions = {
    pretty: true,
 }
 
+// @note
+// clean up package.json
+
 app.use('/graphql',
    graphqlHTTP(req => ({
       ...gqlOptions,

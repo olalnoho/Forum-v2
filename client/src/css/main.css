@@ -42,7 +42,7 @@
 }
 
 .btn--secondary {
-  background: #99818D;
+  background: #99818d;
 }
 
 .relative {
@@ -51,6 +51,12 @@
 
 .info-text {
   color: #888;
+}
+
+input[type="text"],
+input[type="password"] {
+  font-family: inherit;
+  padding: 0.5rem;
 }
 
 .heading-2 {
@@ -299,6 +305,56 @@
   }
 }
 
+.form {
+  background-color: #212424;
+  margin: 10rem auto;
+  width: 600px;
+}
+
+.form .formheader {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  background-color: #303333;
+  padding: 1.5rem;
+  font-size: 1.7rem;
+  letter-spacing: 2px;
+}
+
+.form .formbody {
+  padding: 1.5rem;
+}
+
+.form .formfield {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.form .formfield label {
+  font-size: 1.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.form .formfield:not(:last-child) {
+  margin-bottom: 1.5rem;
+}
+
+.form .formfield input[type="submit"] {
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+}
+
+@media (max-width: 700px) {
+  .form {
+    margin: auto;
+    width: 90%;
+  }
+}
+
 .subsection {
   padding: 1rem;
   -webkit-box-flex: 1;
@@ -475,9 +531,9 @@ ul, ol {
 
 button,
 input[type="submit"] {
+  cursor: pointer;
   outline: none;
   border: none;
-  background: inherit;
   color: inherit;
 }
 

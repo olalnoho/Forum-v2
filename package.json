@@ -1,10 +1,10 @@
 {
-  "name": "BetterForum",
+  "name": "betterforum",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "concurrently \"nodemon server.js\" \"npm run start --prefix client\""
   },
   "keywords": [],
   "author": "",
@@ -20,5 +20,8 @@
     "knex": "^0.21.1",
     "pg": "^8.0.3",
     "sqlite3": "^4.2.0"
+  },
+  "devDependencies": {
+    "concurrently": "^5.2.0"
   }
 }
