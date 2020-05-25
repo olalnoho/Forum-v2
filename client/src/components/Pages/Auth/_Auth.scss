@@ -1,6 +1,6 @@
 .form {
    background-color: lighten($dark-main, 4%);
-   margin: 10rem auto;
+   margin: 0 auto;
    .formheader {
       border-top-right-radius: 10px;
       border-top-left-radius: 10px;
@@ -32,9 +32,8 @@
    width: 600px;
 }
 
-@media(max-width: 700px) {
+@media (max-width: 700px) {
    .form {
-      margin: auto;
       width: 90%;
    }
 }

@@ -40,8 +40,8 @@ exports.resolver = {
       }
    },
 
-   async loginUser() {
-      
+   async loginUser({ }) {
+
    }
 }
 

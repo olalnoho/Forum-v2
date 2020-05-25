@@ -16,15 +16,17 @@ function App() {
   return (
     <>
       <Header />
-      <Switch>
-        <Route path="/" exact component={Landing} />
-        <Route path="/login" exact component={Login} />
-        <Route path="/register" exact component={Register} />
-        {/* 
+      <div className="content">
+        <Switch>
+          <Route path="/" exact component={Landing} />
+          <Route path="/login" exact component={Login} />
+          <Route path="/register" exact component={Register} />
+          {/* 
           // @note change this route 
         */}
-        <Route path="/category" component={Category} />
-      </Switch>
+          <Route path="/category" component={Category} />
+        </Switch>
+      </div>
       <Footer />
     </>
   );
