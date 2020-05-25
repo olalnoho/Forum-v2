@@ -11,7 +11,7 @@ module.exports = `
 
    type User {
       id: ID!
-      username: String
+      username: String!
       email: String!
    }
 
@@ -23,20 +23,15 @@ module.exports = `
    type Category {
       id: ID!
       title: String!
-      subcategories: [Subcategory]!
+      subcategories: [Subcategory!]
    }
 
    type Subcategory {
       id: ID!
-      title: String
-      description: String
-      threads: [Thread]!
+      title: String!
+      description: String!
+      threads: [Thread!]
    }
-
-   """
-      creator in Thread is optional 
-      because user might be deleted
-   """
 
    type Thread {
       id: ID!
@@ -45,10 +40,6 @@ module.exports = `
       creator: User
    }
 
-   """
-      user in Post is optional 
-      because user might be deleted
-   """
    type Post {
       id: ID!
       content: String!

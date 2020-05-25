@@ -24,8 +24,8 @@ class Subcategory {
    }
 
    async threads() {
-      const thread = (await this.threadLoader.load(this.id)) || []
-      return thread.map(x => new Thread(x, this.db))
+      const thread = await this.threadLoader.load(this.id)
+      return thread ? thread.map(x => new Thread(x, this.db)) : null
    }
 }
 

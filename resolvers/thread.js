@@ -13,9 +13,7 @@ exports.Thread = class Thread {
 
    async creator() {
       const [u] = await this.db('user').select('id', 'username')
-         .where({
-            id: this.started_by
-         })
+         .where({ id: this.started_by })
       return new User(u)
    }
 }

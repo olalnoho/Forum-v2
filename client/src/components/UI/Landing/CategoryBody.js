@@ -16,13 +16,13 @@ const CategoryBody = ({ categories }) => {
                   This is a description of the category, feel free to browse it dude
                   </p>
                </div>
-               <div className="section__body__posts">
-                  <span>{new Intl.NumberFormat().format(12545675672)}</span>
+               <div className="section__body__posts hidesmall">
+                  <span>{new Intl.NumberFormat().format(123)}</span>
                   <p>Posts</p>
                </div>
                <div className="section__body__poster">
                   <div>
-                     <span>Last post by: </span>
+                     <span >Last post: </span>
                      <p>{
                         i % 2 === 0 ? 'JohnSmoe' : 'DragonSlayer120981271'
                      }</p>

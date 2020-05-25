@@ -9,6 +9,8 @@
    }
 
    &__body {
+      width: 99%;
+      margin: auto;
       padding: 1rem;
       flex: 1;
       background-color: $medium-main;
@@ -60,6 +62,41 @@
          display: flex;
          align-items: center;
          justify-content: center;
+      }
+   }
+}
+
+@media (max-width: 700px) {
+   .section {
+      &__body {
+         &__name {
+            // text-align: center;
+            flex: 1;
+            p {
+               width: 100%;
+            }
+         }
+
+         &__item {
+            padding-top: 1rem;
+            // flex-direction: column;
+         }
+
+         &__poster {
+            padding: 0.4rem;
+            // margin-top: 2rem;
+            flex: initial;
+            align-items: center;
+            div {
+               p {
+                  margin-top: 1rem;
+                  color: white;
+                  max-width: 10rem;
+                  word-wrap: break-word;
+                  width: initial;
+               }
+            }
+         }
       }
    }
 }

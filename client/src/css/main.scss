@@ -49,3 +49,12 @@ input[type="submit"] {
    background: inherit;
    color: inherit;
 }
+
+@media(max-width: 700px){
+   html {
+      font-size: 50%;
+   }
+   .hidesmall {
+      display: none;
+   }
+}
