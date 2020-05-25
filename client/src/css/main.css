@@ -130,7 +130,7 @@ input[type="password"] {
 }
 
 .nav__list {
-  padding: 2rem;
+  padding: 1rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -147,7 +147,9 @@ input[type="password"] {
 }
 
 .nav__link {
-  padding: 1rem;
+  border-radius: 1rem;
+  display: block;
+  padding: 1rem 1.5rem;
   cursor: pointer;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -159,6 +161,10 @@ input[type="password"] {
 }
 
 .nav__link:hover {
+  background-color: #3a3e3e;
+}
+
+.nav__link.navactive {
   background-color: #3a3e3e;
 }
 
