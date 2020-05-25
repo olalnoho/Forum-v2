@@ -6,7 +6,8 @@ module.exports = `
    }
 
    type Mutation {
-      registerUser(email: String! password: String!): Auth!
+      registerUser(email: String! username: String! password: String!): Auth!
+      loginUser(username: String! password: String!): Auth!
    }
 
    type User {

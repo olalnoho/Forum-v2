@@ -1,3 +1,5 @@
+const generateToken = require('../utils/generateToken')
+
 exports.resolver = {
    async getUserById({ id }, { db }) {
       try {
@@ -13,6 +15,33 @@ exports.resolver = {
          console.log('Error retrieving user')
          throw new Error(err)
       }
+   },
+
+   async registerUser({ username, email, password }, { db }) {
+      try {
+         const [success] = await db('user').insert({
+            username,
+            email,
+            password
+         })
+         if (success > 0) {
+            const [{ id }] = await db.raw('SELECT last_insert_rowid() as id FROM user');
+            return {
+               token: generateToken(id),
+               user: {
+                  id,
+                  username,
+                  email
+               },
+            }
+         }
+      } catch (err) {
+         throw new Error(err)
+      }
+   },
+
+   async loginUser() {
+      
    }
 }
 

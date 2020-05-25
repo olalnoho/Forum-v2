@@ -6,7 +6,6 @@ const db = require('knex')({
    useNullAsDefault: true
 });
 
-
 // @note
 // For debug
 
