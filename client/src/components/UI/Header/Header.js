@@ -1,26 +1,26 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
 const Header = () => {
    return (
       <header className="header">
          <div className="logo">
             <i className="fas fa-align-left"></i>
-            <a href="/"> dunderHead </a>
+            <Link to="/"> dunderHead </Link>
             <i className="fas fa-align-right"></i>
          </div>
          <nav className="nav">
             <ul className="nav__list">
                <li>
-                  <a href="/login" className="nav__link">
+                  <Link to="/login" className="nav__link">
                      <i className="fas fa-sign-in-alt"></i>
                      Login
-                  </a>
+                  </Link>
                </li>
                <li>
-                  <a href="register" className="nav__link">
+                  <Link to="register" className="nav__link">
                      <i className="fas fa-pencil-alt"></i>
                      Register
-                  </a>
+                  </Link>
                </li>
                <li>
                   {/* <a href="#!" className="nav__link">

@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
 const CategoryBody = ({ categories }) => {
    return (
       <ul className="section__body">
@@ -9,7 +9,7 @@ const CategoryBody = ({ categories }) => {
                   {/* 
                      // @note Change this route 
                   */}
-                  <a href="/category">{x}</a>
+                  <Link to="/category">{x}</Link>
                   <p>This is a description of the category, feel free to browse it dude
                   This is a description of the category, feel free to browse it dude
                   This is a description of the category, feel free to browse it dude
