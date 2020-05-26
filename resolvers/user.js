@@ -1,6 +1,7 @@
 const generateToken = require('../utils/generateToken')
 const validatePassword = require('../utils/validatePassword')
 const hashPassword = require('../utils/hashPassword')
+
 exports.resolver = {
    async getUserById({ id }, { db }) {
       try {
