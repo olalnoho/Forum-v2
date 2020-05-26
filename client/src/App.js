@@ -1,7 +1,5 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom'
-import { ApolloProvider } from '@apollo/react-hooks'
-import ApolloClient from 'apollo-boost'
 import Header from './components/UI/Header/Header'
 import Landing from './components/UI/Landing/Landing'
 import Login from './components/Pages/Auth/Login'
@@ -13,13 +11,9 @@ import Footer from './components/UI/Footer/Footer';
 // https://www.webdesignerforum.co.uk/
 
 
-const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql'
-})
-
 function App() {
   return (
-    <ApolloProvider client={client}>
+    <>
       <Header />
       <div className="content">
         <Switch>
@@ -33,7 +27,7 @@ function App() {
         </Switch>
       </div>
       <Footer />
-    </ApolloProvider>
+    </>
   );
 }
 

@@ -1,31 +1,41 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import registerUserMutation from '../../../gql-queries/registerUser'
 import useForm from '../../../hooks/useForm'
 import formatError from '../../../utils/formatErrors'
+import { AuthContext } from '../../../contexts/AuthContext'
 const Register = () => {
-   const [errors, setErrors] = useState('')
+   const { setIsAuth, setUserDetails, userDetails } = useContext(AuthContext)
+   const [errors, setErrors] = useState([])
    const { inputHandler, formState } = useForm({
       username: '',
       password: '',
       email: ''
    })
 
-   const [registerUser, { data, error: mutationError }] = useMutation(registerUserMutation)
+   const [registerUser, { data: mutationData, error: mutationError }] = useMutation(registerUserMutation)
 
    useEffect(() => {
       if (mutationError) setErrors(mutationError.networkError.result.errors)
       return () => {
          setErrors('')
       }
-   }, [mutationError, data])
+   }, [mutationError])
+
+   useEffect(() => {
+      if (mutationData && mutationData.registerUser && mutationData.registerUser.token) {
+         setIsAuth(true)
+         setUserDetails(mutationData.registerUser.user)
+         localStorage.setItem('token', mutationData.registerUser.token)
+      }
+   }, [mutationData, setIsAuth, setUserDetails])
 
    const submitHandler = async e => {
       e.preventDefault()
       try {
          await registerUser({ variables: formState })
       } catch (error) {
-         // console.log(error)
+         console.log(error)
       }
    }
 
