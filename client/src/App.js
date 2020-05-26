@@ -22,7 +22,7 @@ function App() {
           {/* 
           // @todo change this route 
         */}
-          <Route path="/category" component={Category} />
+          <Route path="/category/:id" component={Category} />
         </Switch>
       </div>
       <Footer />

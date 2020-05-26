@@ -35,9 +35,12 @@ CREATE TABLE post (
    content TEXT NOT NULL,
    user_id INTEGER NOT NULL,
    thread_id NOT NULL,
+   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
    FOREIGN KEY(user_id) REFERENCES user(id),
    FOREIGN KEY(thread_id) REFERENCES thread(id)
 );
+
+INSERT INTO post(content, user_id, thread_id)
 
 CREATE TABLE category (
    id INTEGER NOT NULL PRIMARY KEY,

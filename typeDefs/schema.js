@@ -2,8 +2,12 @@ module.exports = `
    type Query {
       getUserById(id: ID!): User
       getCurrentUser: User
-      getAllCategories: [Category]!
+
+      getAllCategories: [Category!]!
       getSubcategoryById(id: ID!): Subcategory
+
+      getAllThreadsInSubcategory(id: ID!): [Thread!]
+      getWholeThread(id: ID!): Thread!
    }
 
    type Mutation {
@@ -40,6 +44,7 @@ module.exports = `
       title: String!
       content: String!
       creator: User
+      posts: [Post!]
    }
 
    type Post {

@@ -26,7 +26,6 @@ exports.resolver = {
          const [user] = await db('user').select('id', 'username', 'email').where({ id })
          return user
       } catch (error) {
-         console.log('Error when getting')
          throw new Error('User does not exist')
       }
    },
