@@ -31,7 +31,14 @@ export default props => {
       token && localStorage.setItem('token', token)
    }, [])
 
-   return <AuthContext.Provider value={{ login, logout, isAuth, setIsAuth, userDetails, setUserDetails }}>
+   return <AuthContext.Provider value={{
+      login,
+      logout,
+      isAuth,
+      setIsAuth,
+      userDetails,
+      setUserDetails
+   }}>
       {props.children}
    </AuthContext.Provider>
 }

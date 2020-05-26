@@ -9,10 +9,6 @@ import Footer from './components/UI/Footer/Footer';
 
 import useAuth from './hooks/useAuth'
 
-// https://www.0to255.com/4b3b43
-// https://www.webdesignerforum.co.uk/
-
-
 function App() {
   const { loading } = useAuth()
   return (

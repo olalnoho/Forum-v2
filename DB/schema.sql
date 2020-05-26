@@ -26,8 +26,6 @@ CREATE TABLE thread (
       ON DELETE CASCADE,
 
    CONSTRAINT user_fk
-      -- I don't want to delete thread
-      -- with user, probably.
       FOREIGN KEY(started_by)
       REFERENCES user(id)
 );
@@ -36,7 +34,9 @@ CREATE TABLE post (
    id INTEGER NOT NULL PRIMARY KEY,
    content TEXT NOT NULL,
    user_id INTEGER NOT NULL,
-   FOREIGN KEY(user_id) REFERENCES user(id)
+   thread_id NOT NULL,
+   FOREIGN KEY(user_id) REFERENCES user(id),
+   FOREIGN KEY(thread_id) REFERENCES thread(id)
 );
 
 CREATE TABLE category (

@@ -20,7 +20,7 @@ const useAuth = () => {
 
    // @note
    // We're exporing loading because other components
-   // might want to know when the request is done - like the header for links
+   // might want to know when the request is done - like the header for links.
 
    return {
       loading
