@@ -1,0 +1,27 @@
+.createthread {
+   .form {
+      width: 100%;
+      textarea {
+         max-width: 100%;
+      }
+   }
+
+   .btn {
+      display: inline-flex;
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+      align-self: flex-start;
+   }
+}
+
+@media (max-width: 900px) {
+   .createthread {
+      .form {
+         width: 100%;
+      }
+
+      .sm-container {
+         width: 90%;
+      }
+   }
+}

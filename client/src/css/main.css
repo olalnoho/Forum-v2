@@ -16,6 +16,12 @@
           flex-direction: column;
 }
 
+.sm-container {
+  max-width: 80rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
 .content {
   background-color: #171919;
   display: -webkit-box;
@@ -61,6 +67,10 @@
   background: #99818d !important;
 }
 
+.btn--light {
+  background-color: #303333 !important;
+}
+
 .relative {
   position: relative;
 }
@@ -83,6 +93,10 @@ input[type="password"] {
 
 .heading-2 {
   font-size: 3rem;
+}
+
+.heading-3 {
+  font-size: 2.5rem;
 }
 
 .header {
@@ -399,8 +413,16 @@ input[type="password"] {
   font-size: 1.4rem;
 }
 
+.subsection__back {
+  margin-bottom: 3rem;
+}
+
+.subsection__back a {
+  font-size: 1.4rem;
+}
+
 .subsection__new {
-  margin: 3rem 0;
+  margin: 0 0 3rem 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -448,7 +470,7 @@ input[type="password"] {
   padding: 0.2rem 1rem;
 }
 
-.subsection__threads h2 {
+.subsection__threads h3 {
   padding: 1rem;
 }
 
@@ -524,6 +546,33 @@ input[type="password"] {
 
 .subsection__threads .thread__user span {
   margin-bottom: 1rem;
+}
+
+.createthread .form {
+  width: 100%;
+}
+
+.createthread .form textarea {
+  max-width: 100%;
+}
+
+.createthread .btn {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+}
+
+@media (max-width: 900px) {
+  .createthread .form {
+    width: 100%;
+  }
+  .createthread .sm-container {
+    width: 90%;
+  }
 }
 
 * {

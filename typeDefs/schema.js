@@ -13,6 +13,7 @@ module.exports = `
    type Mutation {
       registerUser(email: String! username: String! password: String!): Auth!
       loginUser(username: String! password: String!): Auth!
+      createThread(title: String! content: String! subcategory_id: ID!): Thread!
    }
 
    type User {

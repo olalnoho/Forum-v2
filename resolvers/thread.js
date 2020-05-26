@@ -1,4 +1,5 @@
 const { User } = require('./user')
+const getUserId = require('../utils/getIdFromToken')
 
 exports.resolver = {
    async getAllThreadsInSubcategory({ id }, ctx) {
@@ -19,6 +20,25 @@ exports.resolver = {
       } catch (err) {
          console.log('Error getting whole thread')
          throw new Error(err)
+      }
+   },
+
+   async createThread({ title, content, subcategory_id }, ctx) {
+      [title, content, subcategory_id].forEach(x => {
+         if(!x.trim()) throw new Error('Invalid data')
+      })
+      try {
+         const userId = getUserId(ctx.req.headers)
+         const res = await ctx.db('thread').insert({
+            started_by: userId,
+            subcategory_id,
+            title,
+            content
+         })
+         const [{ threadId }] = await ctx.db.raw('SELECT last_insert_rowid() as threadId FROM thread');
+         return new Thread({ id: threadId, content, title })
+      } catch (err) {
+         console.log(err)
       }
    }
 }

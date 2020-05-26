@@ -1,3 +1,4 @@
 node_modules
 DB/forum.sqlite
 DB/seed*
+DB/queries.sql

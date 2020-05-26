@@ -13,8 +13,15 @@
       // margin-bottom: 4rem;
    }
 
+   &__back {
+      margin-bottom: 3rem;
+      a {
+         font-size: 1.4rem;
+      }
+   }
+
    &__new {
-      margin: 3rem 0;
+      margin: 0 0 3rem 0;
       display: flex;
       justify-content: flex-end;
       a {
@@ -45,7 +52,7 @@
    }
 
    &__threads {
-      h2 {
+      h3 {
          padding: 1rem;
       }
       background-color: $medium-main;

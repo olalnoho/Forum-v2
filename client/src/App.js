@@ -8,21 +8,23 @@ import Category from './components/Pages/Category/Category';
 import Footer from './components/UI/Footer/Footer';
 
 import useAuth from './hooks/useAuth'
+import CreateThread from './components/Pages/CreateThread/CreateThread';
 
 function App() {
   const { loading } = useAuth()
   return (
     <>
-      <Header loading={loading}/>
+      <Header loading={loading} />
       <div className="content">
         <Switch>
-          <Route path="/" exact component={Landing} />
-          <Route path="/login" exact component={Login} />
-          <Route path="/register" exact component={Register} />
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
           {/* 
           // @todo change this route 
         */}
-          <Route path="/category/:id" component={Category} />
+          <Route exact path="/category/:id" component={Category} />
+          <Route path="/category/:id/create" component={CreateThread} />
         </Switch>
       </div>
       <Footer />

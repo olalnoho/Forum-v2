@@ -10,7 +10,7 @@ const GuestLinks = () => {
             </NavLink>
          </li>
          <li>
-            <NavLink activeClassName="navactive" to="register" className="nav__link">
+            <NavLink activeClassName="navactive" to="/register" className="nav__link">
                <i className="fas fa-pencil-alt"></i>
                Register
             </NavLink>
