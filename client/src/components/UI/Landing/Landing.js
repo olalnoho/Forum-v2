@@ -15,7 +15,7 @@ const Landing = () => {
    const { data } = useQuery(getAllCategories)
    return (
       <div className="container">
-         {data && data.getAllCategories && <div className="wrapper">
+         {data && data.getAllCategories &&
             <ol>
                {data.getAllCategories.map(x =>
                   (
@@ -26,7 +26,7 @@ const Landing = () => {
                   )
                )}
             </ol>
-         </div>}
+         }
       </div>
    )
 }

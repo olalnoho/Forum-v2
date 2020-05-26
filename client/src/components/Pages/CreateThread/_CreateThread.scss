@@ -1,4 +1,7 @@
 .createthread {
+   max-width: 80rem;
+   width: 100%;
+   margin: 0 auto;
    .form {
       width: 100%;
       textarea {
@@ -19,9 +22,6 @@
       .form {
          width: 100%;
       }
-
-      .sm-container {
-         width: 90%;
-      }
+      width: 95%;
    }
 }

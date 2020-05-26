@@ -33,8 +33,8 @@ const CreateThread = ({
       }
    }
    return (
-      <div className="container createthread">
-         <div className="sm-container">
+      <div className="container">
+         <div className="createthread">
             <button onClick={history.goBack} className="btn btn--light">Go Back</button>
             <form className="form" onSubmit={submitHandler}>
                <div className="formheader">
