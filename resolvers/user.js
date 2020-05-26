@@ -51,7 +51,7 @@ exports.resolver = {
       }
    },
 
-   async loginUser({ username, password }, { db }) {
+   async loginUser({ username, password }, { db, req }) {
       try {
          const [user] = await db('user')
             .select('*')

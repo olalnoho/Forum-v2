@@ -8,7 +8,16 @@ import AuthContext from './contexts/AuthContext'
 import './css/main.css'
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql'
+  uri: 'http://localhost:4000/graphql',
+  request: (operation) => {
+    const token = localStorage.getItem('token')
+    console.log(token)
+    operation.setContext({
+      headers: {
+        authorization: token ? token : ''
+      }
+    })
+  }
 })
 
 ReactDOM.render(
