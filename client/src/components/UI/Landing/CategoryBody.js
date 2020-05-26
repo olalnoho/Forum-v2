@@ -7,7 +7,7 @@ const CategoryBody = ({ categories }) => {
             <li key={i} className="section__body__item">
                <div className="section__body__name">
                   {/* 
-                     // @note Change this route 
+                     // @todo Change this route 
                   */}
                   <Link to="/category">{x}</Link>
                   <p>This is a description of the category, feel free to browse it dude

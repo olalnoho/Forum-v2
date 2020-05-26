@@ -1,7 +1,10 @@
 const db = require('../DB/connection')
 
 module.exports = (table, comparer) => async keys => {
-   const res = await db(table).select('*').whereIn(comparer, keys)
+   const res = await db(table)
+      .select('*')
+      .whereIn(comparer, keys)
+
    const map = {}
    res.forEach(x => {
       const key = x[comparer]

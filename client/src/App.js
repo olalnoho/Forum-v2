@@ -22,7 +22,7 @@ function App() {
           <Route path="/login" exact component={Login} />
           <Route path="/register" exact component={Register} />
           {/* 
-          // @note change this route 
+          // @todo change this route 
         */}
           <Route path="/category" component={Category} />
         </Switch>

@@ -19,7 +19,7 @@ const gqlOptions = {
    pretty: true,
 }
 
-// @note
+// @todo
 // clean up package.json
 
 app.use('/graphql',

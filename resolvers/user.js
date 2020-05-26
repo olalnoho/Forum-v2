@@ -1,5 +1,6 @@
 const generateToken = require('../utils/generateToken')
-
+const validatePassword = require('../utils/validatePassword')
+const hashPassword = require('../utils/hashPassword')
 exports.resolver = {
    async getUserById({ id }, { db }) {
       try {
@@ -19,10 +20,11 @@ exports.resolver = {
 
    async registerUser({ username, email, password }, { db }) {
       try {
+         const hashedPassword = await hashPassword(password)
          const [success] = await db('user').insert({
             username,
             email,
-            password
+            password: hashedPassword
          })
          if (success > 0) {
             const [{ id }] = await db.raw('SELECT last_insert_rowid() as id FROM user');
@@ -36,12 +38,34 @@ exports.resolver = {
             }
          }
       } catch (err) {
+         console.log('Error registering user')
          throw new Error(err)
       }
    },
 
-   async loginUser({ }) {
+   async loginUser({ username, password }, { db }) {
+      try {
+         const [user] = await db('user')
+            .select('*')
+            .where({ username })
 
+         if (!user) throw new Error('Invalid Credentials')
+
+         const isValidPassword = await validatePassword(user.password, password)
+         if(!isValidPassword) throw new Error('Invalid Credentials')
+
+         return {
+            token: generateToken(user.id),
+            user: {
+               id: user.id,
+               email: user.email,
+               username: user.username
+            }
+         }
+      } catch (err) {
+         console.log('Error loggin in user')
+         throw new Error('Invalid Credentials')
+      }
    }
 }
 
