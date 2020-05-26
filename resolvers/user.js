@@ -22,12 +22,16 @@ exports.resolver = {
    async registerUser({ username, email, password }, { db }) {
       try {
          const hashedPassword = await hashPassword(password)
+         const userExists = await db('user').select('id').where({ username }).orWhere({ email })
+         if(userExists.length > 0) {
+            throw new Error('User already exists')
+         }
          const [success] = await db('user').insert({
             username,
             email,
             password: hashedPassword
          })
-         if (success > 0) {
+         if (success) {
             const [{ id }] = await db.raw('SELECT last_insert_rowid() as id FROM user');
             return {
                token: generateToken(id),
@@ -37,9 +41,12 @@ exports.resolver = {
                   email
                },
             }
+         } else {
+            throw new Error('User could not be saved')
          }
       } catch (err) {
          console.log('Error registering user')
+         console.log(err)
          throw new Error(err)
       }
    },
@@ -53,7 +60,7 @@ exports.resolver = {
          if (!user) throw new Error('Invalid Credentials')
 
          const isValidPassword = await validatePassword(user.password, password)
-         if(!isValidPassword) throw new Error('Invalid Credentials')
+         if (!isValidPassword) throw new Error('Invalid Credentials')
 
          return {
             token: generateToken(user.id),

@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors')
 const graphqlHTTP = require('express-graphql');
 const { buildSchema } = require('graphql');
 const DataLoader = require('dataloader')
@@ -11,7 +12,7 @@ const loader = require('./dataloaders/loader')
 
 const schema = buildSchema(typeDefs)
 const app = express();
-
+app.use(cors())
 const gqlOptions = {
    schema,
    rootValue: root,
@@ -21,6 +22,7 @@ const gqlOptions = {
 
 // @todo
 // clean up package.json
+// like faker and sqlite
 
 app.use('/graphql',
    graphqlHTTP(req => ({

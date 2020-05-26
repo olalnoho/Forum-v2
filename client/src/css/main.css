@@ -75,6 +75,12 @@ input[type="password"] {
   padding: 0.5rem;
 }
 
+.error {
+  padding: 1rem;
+  background-color: crimson;
+  font-size: 1.4rem;
+}
+
 .heading-2 {
   font-size: 3rem;
 }
