@@ -12,7 +12,6 @@ const Login = () => {
    const [errors, setErrors] = useState([])
    const [loginUser, { data: mutationData, error: mutationError }] = useMutation(loginMutation)
    const { inputHandler, formState } = useForm({ username: '', password: '' })
-
    useEffect(() => {
       if (mutationError) setErrors(mutationError.networkError.result.errors)
       return () => {

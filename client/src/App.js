@@ -7,11 +7,14 @@ import Register from './components/Pages/Auth/Register'
 import Category from './components/Pages/Category/Category';
 import Footer from './components/UI/Footer/Footer';
 
+import useAuth from './hooks/useAuth'
+
 // https://www.0to255.com/4b3b43
 // https://www.webdesignerforum.co.uk/
 
 
 function App() {
+  useAuth()
   return (
     <>
       <Header />

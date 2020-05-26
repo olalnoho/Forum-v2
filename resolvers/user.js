@@ -1,4 +1,5 @@
 const generateToken = require('../utils/generateToken')
+const getUserId = require('../utils/getIdFromToken')
 const validatePassword = require('../utils/validatePassword')
 const hashPassword = require('../utils/hashPassword')
 
@@ -19,11 +20,22 @@ exports.resolver = {
       }
    },
 
+   async getCurrentUser(_, { req, db }) {
+      try {
+         const id = getUserId(req.headers, false)
+         const [user] = await db('user').select('id', 'username', 'email').where({ id })
+         return user
+      } catch (error) {
+         console.log('Error when getting')
+         throw new Error('User does not exist')
+      }
+   },
+
    async registerUser({ username, email, password }, { db }) {
       try {
          const hashedPassword = await hashPassword(password)
          const userExists = await db('user').select('id').where({ username }).orWhere({ email })
-         if(userExists.length > 0) {
+         if (userExists.length > 0) {
             throw new Error('User already exists')
          }
          const [success] = await db('user').insert({

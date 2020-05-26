@@ -13,7 +13,6 @@ import CategoryBody from './CategoryBody'
 
 const Landing = () => {
    const { data } = useQuery(getAllCategories)
-   console.log(data)
    return (
       <div className="container">
          {data && data.getAllCategories && <div className="wrapper">
