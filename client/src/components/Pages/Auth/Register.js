@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { useMutation } from '@apollo/react-hooks'
+import { Redirect } from 'react-router-dom'
 import registerUserMutation from '../../../gql-queries/registerUser'
 import useForm from '../../../hooks/useForm'
 import formatError from '../../../utils/formatErrors'
@@ -8,8 +9,9 @@ import { AuthContext } from '../../../contexts/AuthContext'
 // @todo
 // Later redirect users if they are logged in
 const Register = () => {
-   const { setIsAuth, setUserDetails } = useContext(AuthContext)
+   const { isAuth, login } = useContext(AuthContext)
    const [errors, setErrors] = useState([])
+   
    const { inputHandler, formState } = useForm({
       username: '',
       password: '',
@@ -27,11 +29,9 @@ const Register = () => {
 
    useEffect(() => {
       if (mutationData && mutationData.registerUser && mutationData.registerUser.token) {
-         setIsAuth(true)
-         setUserDetails(mutationData.registerUser.user)
-         localStorage.setItem('token', mutationData.registerUser.token)
+         login(mutationData.registerUser.user, mutationData.registerUser.token)
       }
-   }, [mutationData, setIsAuth, setUserDetails])
+   }, [mutationData, login])
 
    const submitHandler = async e => {
       e.preventDefault()
@@ -41,6 +41,8 @@ const Register = () => {
          console.log(error)
       }
    }
+
+   if (isAuth) return <Redirect to="/" />
 
    return (
       <div className="container">

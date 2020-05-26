@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 
 export const AuthContext = React.createContext({
    isAuth: false,
@@ -8,6 +8,8 @@ export const AuthContext = React.createContext({
       email: ''
    },
    setUserDetails: () => { },
+   logout: () => { },
+   login: () => { }
 })
 
 export default props => {
@@ -17,7 +19,19 @@ export default props => {
       email: ''
    })
 
-   return <AuthContext.Provider value={{ isAuth, setIsAuth, userDetails, setUserDetails }}>
+   const logout = useCallback(() => {
+      setUserDetails({})
+      setIsAuth(false)
+      localStorage.removeItem('token')
+   }, [])
+
+   const login = useCallback((user, token) => {
+      setIsAuth(true)
+      setUserDetails(user)
+      token && localStorage.setItem('token', token)
+   }, [])
+
+   return <AuthContext.Provider value={{ login, logout, isAuth, setIsAuth, userDetails, setUserDetails }}>
       {props.children}
    </AuthContext.Provider>
 }

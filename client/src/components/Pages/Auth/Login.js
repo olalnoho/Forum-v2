@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useMutation } from '@apollo/react-hooks'
+import { Redirect } from 'react-router-dom'
 import loginMutation from '../../../gql-queries/loginUser'
 import useForm from '../../../hooks/useForm'
 import formatError from '../../../utils/formatErrors'
@@ -8,23 +9,23 @@ import { AuthContext } from '../../../contexts/AuthContext'
 // @todo
 // Later redirect users if they are logged in
 const Login = () => {
-   const { setIsAuth, setUserDetails } = useContext(AuthContext)
+   const { isAuth, login } = useContext(AuthContext)
    const [errors, setErrors] = useState([])
    const [loginUser, { data: mutationData, error: mutationError }] = useMutation(loginMutation)
    const { inputHandler, formState } = useForm({ username: '', password: '' })
+   
    useEffect(() => {
       if (mutationError) setErrors(mutationError.networkError.result.errors)
       return () => {
          setErrors('')
       }
    }, [mutationError])
+
    useEffect(() => {
       if (mutationData && mutationData.loginUser && mutationData.loginUser.token) {
-         setIsAuth(true)
-         setUserDetails(mutationData.loginUser.user)
-         localStorage.setItem('token', mutationData.loginUser.token)
+         login(mutationData.loginUser.user, mutationData.loginUser.token)
       }
-   }, [mutationData, setIsAuth, setUserDetails])
+   }, [mutationData, login])
 
    const submitHandler = async e => {
       e.preventDefault()
@@ -34,6 +35,8 @@ const Login = () => {
          console.log(err)
       }
    }
+
+   if(isAuth) return <Redirect to="/" />
    return (
       <div className="container">
          <form className="form" onSubmit={submitHandler}>

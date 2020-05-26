@@ -54,11 +54,11 @@
 }
 
 .btn--primary {
-  background-color: #436449;
+  background-color: #436449 !important;
 }
 
 .btn--secondary {
-  background: #99818d;
+  background: #99818d !important;
 }
 
 .relative {
@@ -558,6 +558,7 @@ ul, ol {
 
 button,
 input[type="submit"] {
+  background-color: inherit;
   cursor: pointer;
   outline: none;
   border: none;

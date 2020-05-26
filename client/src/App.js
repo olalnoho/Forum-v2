@@ -14,10 +14,10 @@ import useAuth from './hooks/useAuth'
 
 
 function App() {
-  useAuth()
+  const { loading } = useAuth()
   return (
     <>
-      <Header />
+      <Header loading={loading}/>
       <div className="content">
         <Switch>
           <Route path="/" exact component={Landing} />

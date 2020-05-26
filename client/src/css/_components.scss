@@ -28,10 +28,10 @@
 .btn {
    padding: 1rem 2rem;
    &--primary {
-      background-color: rgb(67, 100, 73);
+      background-color: rgb(67, 100, 73) !important;
    }
    &--secondary {
-      background: #99818d;
+      background: #99818d !important;
    }
 }
 
