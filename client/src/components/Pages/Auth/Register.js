@@ -4,8 +4,11 @@ import registerUserMutation from '../../../gql-queries/registerUser'
 import useForm from '../../../hooks/useForm'
 import formatError from '../../../utils/formatErrors'
 import { AuthContext } from '../../../contexts/AuthContext'
+
+// @todo
+// Later redirect users if they are logged in
 const Register = () => {
-   const { setIsAuth, setUserDetails, userDetails } = useContext(AuthContext)
+   const { setIsAuth, setUserDetails } = useContext(AuthContext)
    const [errors, setErrors] = useState([])
    const { inputHandler, formState } = useForm({
       username: '',
