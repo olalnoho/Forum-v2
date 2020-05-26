@@ -10,7 +10,7 @@ const CategoryBody = ({ categories }) => {
                   {/* 
                      // @todo Change this route 
                   */}
-                  <Link to="/category">{x.title}</Link>
+                  <Link to={`/category/${x.id}`}>{x.title}</Link>
                   <p> {x.description} </p>
                </div>
                <div className="section__body__posts hidesmall">

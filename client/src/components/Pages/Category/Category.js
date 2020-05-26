@@ -1,7 +1,8 @@
 import React from 'react'
-import {} from '@apollo/react-hooks'
+import { useQuery } from '@apollo/react-hooks'
 import Thread from './Thread'
 import Paginator from './Paginator'
+import getSubcatgoryAndThreads from '../../../gql-queries/getSubcatgoryAndThreads'
 const MOCK_DATA = {
    cat_name: 'Web Designer Forum Introductions',
    cat_tagline: 'New to the Web Design Forum? - Tell us a little about yourself here.',
@@ -48,26 +49,31 @@ const MOCK_DATA = {
       },
    ]
 }
-const Category = () => {
+const Category = props => {
+   const { data } = useQuery(getSubcatgoryAndThreads, { variables: { id: props.match.params.id } })
+   console.log(data)
    return (
       <div className="container">
          <div className="wrapper">
-            <div className="subsection">
+            {data && <div className="subsection">
                <div className="subsection__header">
-                  <h2>{MOCK_DATA.cat_name}</h2>
-                  <p>{MOCK_DATA.cat_tagline}</p>
+                  <h2>{data.getSubcategoryById.title}</h2>
+                  <p>{data.getSubcategoryById.description}</p>
                </div>
                <div className="subsection__new">
                   <a className="btn btn--primary" href="#!">Start a new Topic</a>
                </div>
                <Paginator />
                <div className="subsection__threads">
-                  <ol>
-                     {MOCK_DATA.threads.map((x, i) => <Thread key={i} x={x} />)}
-                  </ol>
+                  {data.getSubcategoryById.threads ? 
+                     <ol>
+                        {data.getSubcategoryById.threads.map((x, i) => <Thread key={i} x={x} />)}
+                     </ol> :
+                     <h2 className="heading-3">No threads have been created here yet.</h2>
+                  }
                </div>
                <Paginator />
-            </div>
+            </div>}
          </div>
       </div>
    )

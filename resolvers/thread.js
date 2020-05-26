@@ -24,9 +24,9 @@ exports.resolver = {
 }
 
 class Thread {
-   constructor({ id, title, content, started_by }, { db, userLoader }) {
+   constructor({ id, title, content, started_by }, ctx) {
       Object.assign(this, {
-         id, title, content, db, started_by, userLoader
+         id, title, content, started_by, ...ctx
       })
    }
 

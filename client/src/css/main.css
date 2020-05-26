@@ -448,6 +448,10 @@ input[type="password"] {
   padding: 0.2rem 1rem;
 }
 
+.subsection__threads h2 {
+  padding: 1rem;
+}
+
 .subsection__threads .thread {
   margin: 2rem 0;
   font-size: 1.4rem;

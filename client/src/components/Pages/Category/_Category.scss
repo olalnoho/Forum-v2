@@ -45,6 +45,9 @@
    }
 
    &__threads {
+      h2 {
+         padding: 1rem;
+      }
       background-color: $medium-main;
       font-size: 1.4rem;
       padding: 0.2rem 1rem;

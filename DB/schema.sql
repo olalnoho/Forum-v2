@@ -40,7 +40,6 @@ CREATE TABLE post (
    FOREIGN KEY(thread_id) REFERENCES thread(id)
 );
 
-INSERT INTO post(content, user_id, thread_id)
 
 CREATE TABLE category (
    id INTEGER NOT NULL PRIMARY KEY,

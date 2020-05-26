@@ -5,15 +5,15 @@ const Thread = ({ x }) => {
       <li className="thread">
          <div className="thread__info">
             <a href="#!"> {x.title} </a>
-            <p className="info-text"> Made by: {x.author} </p>
+            <p className="info-text"> Made by: {x.creator.username} </p>
          </div>
          <div className="thread__posts">
             <span>{x.replies} replies</span>
             {/* <p className="info-text">{x.views} views</p> */}
          </div>
          <div className="thread__user">
-            <span> {x.last_post.author}</span>
-            <p className="info-text"> {x.last_post.date.toLocaleDateString('en-us')}</p>
+            <span> last post </span>
+            <p className="info-text"> {new Date().toLocaleDateString('en-us')}</p>
          </div>
       </li>
    )

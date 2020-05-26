@@ -17,15 +17,15 @@ exports.resolver = {
 }
 
 class Subcategory {
-   constructor({ id, title, description }, { db, threadLoader }) {
+   constructor({ id, title, description }, ctx) {
       Object.assign(this, {
-         id, title, description, db, threadLoader
+         id, title, description, ...ctx
       })
    }
 
    async threads() {
       const thread = await this.threadLoader.load(this.id)
-      return thread ? thread.map(x => new Thread(x, this.db)) : null
+      return thread ? thread.map(x => new Thread(x, { db: this.db, userLoader: this.userLoader })) : null
    }
 }
 
