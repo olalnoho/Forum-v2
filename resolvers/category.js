@@ -14,17 +14,13 @@ exports.resolver = {
 class Category {
    constructor({ title, id }, ctx) {
       Object.assign(this, {
-         title, id, ...ctx
+         title, id, ctx
       })
    }
    async subcategories() {
       const subcats = await this.subcatLoader.load(this.id)
       return subcats ?
-         subcats.map(x => new Subcategory(x, {
-            db: this.db,
-            threadLoader: this.threadLoader,
-            postCountLoader: this.postCountLoader
-         })) : null
+         subcats.map(x => new Subcategory(x, this.ctx)) : null
    }
 }
 

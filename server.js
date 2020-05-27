@@ -9,7 +9,8 @@ const root = require('./resolvers/')
 const typeDefs = require('./typeDefs/schema')
 
 const loader = require('./dataloaders/loader')
-const postCountLoader = require('./dataloaders/subcatPostCountLoader')
+const subcatPostCountLoader = require('./dataloaders/subcatPostCountLoader')
+const threadPostCountLoader = require('./dataloaders/threadPostCountLoader')
 
 const schema = buildSchema(typeDefs)
 const app = express();
@@ -41,7 +42,8 @@ app.use('/graphql',
          // thread -> post relationship
          postLoader: new DataLoader(loader('post', 'thread_id')),
          // postcount for all subcats in cat 
-         postCountLoader: new DataLoader(postCountLoader)
+         subcatPostCountLoader: new DataLoader(subcatPostCountLoader),
+         threadPostCountLoader: new DataLoader(threadPostCountLoader)
       }
    }))
 )

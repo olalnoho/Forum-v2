@@ -68,6 +68,11 @@ class Thread {
          throw new Error(err)
       }
    }
+
+   async postCount(){
+      const res = await this.ctx.threadPostCountLoader.load(this.id)
+      return res || 0
+   }
 }
 
 exports.Thread = Thread

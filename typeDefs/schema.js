@@ -49,6 +49,7 @@ module.exports = `
       content: String!
       creator: User
       posts: [Post!]
+      postCount: Int!
    }
 
    type ThreadCreate {

@@ -6,7 +6,7 @@ exports.resolver = {
 
 class Post {
    constructor({ id, content, user_id }, ctx) {
-      Object.assign(this, { id, content, ctx, user_id })
+      Object.assign(this, { id, content, user_id, ctx })
    }
 
    async user() {
