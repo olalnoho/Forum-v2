@@ -17,6 +17,10 @@
          font-size: 1.4rem;
          color: #888;
       }
+      p {
+         margin: 1rem 0;
+         font-size: 1.4rem;
+      }
    }
    &__actions {
       display: flex;
@@ -31,7 +35,12 @@
       }
    }
 
-   &__posts {
-      min-height: 80vh;
+   &__reply {
+      .form {
+         width: unset;
+         textarea {
+            width: 100%;
+         }
+      }
    }
 }

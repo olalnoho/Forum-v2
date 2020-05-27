@@ -12,7 +12,7 @@ const Thread = ({ thread }) => {
             {/* <p className="info-text">{x.views} views</p> */}
          </div>
          <div className="thread__user">
-            <span> last post </span>
+            <span> Last post </span>
             <p className="info-text"> {new Date().toLocaleDateString('en-us')}</p>
          </div>
       </li>

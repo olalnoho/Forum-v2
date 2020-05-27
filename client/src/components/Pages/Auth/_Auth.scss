@@ -1,5 +1,4 @@
 .form {
-   background-color: lighten($dark-main, 4%);
    margin: 0 auto;
    .formheader {
       border-top-right-radius: 10px;
@@ -8,12 +7,18 @@
       padding: 1.5rem;
       font-size: 1.7rem;
       letter-spacing: 2px;
+      // border-bottom: 1px solid #fff;
    }
-
+   
    .formbody {
+      background-color: lighten($dark-main, 4%);
       padding: 1.5rem;
    }
    .formfield {
+
+      textarea {
+         max-width: 100%;
+      }
       label {
          font-size: 1.5rem;
          margin-bottom: 0.6rem;

@@ -58,7 +58,8 @@
 }
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+textarea {
   font-family: inherit;
   padding: 0.5rem;
 }
@@ -390,7 +391,6 @@ input[type="password"] {
 }
 
 .form {
-  background-color: #212424;
   margin: 0 auto;
   width: 600px;
 }
@@ -405,6 +405,7 @@ input[type="password"] {
 }
 
 .form .formbody {
+  background-color: #212424;
   padding: 1.5rem;
 }
 
@@ -416,6 +417,10 @@ input[type="password"] {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+}
+
+.form .formfield textarea {
+  max-width: 100%;
 }
 
 .form .formfield label {
@@ -455,6 +460,7 @@ input[type="password"] {
 }
 
 .subsection__header p {
+  max-width: 70%;
   color: #888;
   font-size: 1.4rem;
 }
@@ -659,6 +665,11 @@ input[type="password"] {
   color: #888;
 }
 
+.threadview__header p {
+  margin: 1rem 0;
+  font-size: 1.4rem;
+}
+
 .threadview__actions {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -682,8 +693,51 @@ input[type="password"] {
   margin-right: 1rem;
 }
 
-.threadview__posts {
-  min-height: 80vh;
+.threadview__reply .form {
+  width: unset;
+}
+
+.threadview__reply .form textarea {
+  width: 100%;
+}
+
+.post {
+  background-color: #1c1e1e;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 17rem 1fr;
+      grid-template-columns: 17rem 1fr;
+  height: 20rem;
+  margin: 2rem auto;
+}
+
+.post__user {
+  background-color: #1e2121;
+  font-size: 1.4rem;
+  padding: 1rem 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.post__user span:first-child {
+  font-size: 1.5rem;
+  color: darksalmon;
+}
+
+.post__user img {
+  height: 10rem;
+  width: 10rem;
+  border-radius: 50%;
 }
 
 * {

@@ -1,0 +1,26 @@
+.post {
+   background-color: lighten($dark-main, 2%);
+   display: grid;
+   grid-template-columns: 17rem 1fr;
+   height: 20rem;
+   margin: 2rem auto;
+
+   &__user {
+      background-color: lighten($dark-main, 3%);
+      font-size: 1.4rem;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-around;
+      flex-direction: column;
+      align-items: center;
+      span:first-child {
+         font-size: 1.5rem;
+         color: darksalmon;
+      }
+      img {
+         height: 10rem;
+         width: 10rem;
+         border-radius: 50%;
+      }
+   }
+}
