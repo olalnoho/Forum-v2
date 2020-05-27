@@ -9,7 +9,7 @@ const root = require('./resolvers/')
 const typeDefs = require('./typeDefs/schema')
 
 const loader = require('./dataloaders/loader')
-const postCountLoader = require('./dataloaders/postCountLoader')
+const postCountLoader = require('./dataloaders/subcatPostCountLoader')
 
 const schema = buildSchema(typeDefs)
 const app = express();
