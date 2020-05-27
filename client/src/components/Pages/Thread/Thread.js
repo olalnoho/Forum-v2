@@ -7,7 +7,6 @@ const Thread = ({
    match: { params: { id } }
 }) => {
    const { data } = useQuery(getThreadById, { variables: { id } })
-   console.log(data)
    return (
       <div className="container">
          <div className="threadview">

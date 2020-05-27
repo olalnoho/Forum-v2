@@ -48,9 +48,9 @@ exports.resolver = {
 }
 
 class Thread {
-   constructor({ id, title, content, started_by }, ctx) {
+   constructor(entity, ctx) {
       Object.assign(this, {
-         id, title, content, started_by, ctx
+         ...entity, ctx
       })
    }
 
@@ -72,6 +72,14 @@ class Thread {
    async postCount(){
       const res = await this.ctx.threadPostCountLoader.load(this.id)
       return res || 0
+   }
+
+   async lastPost() {
+      const [lastPost] = await this.ctx.db('post')
+         .where('thread_id', this.id) 
+         .orderBy('created_at', 'desc')
+         .limit(1)
+      return lastPost ? new Post(lastPost, this.ctx) : null
    }
 }
 

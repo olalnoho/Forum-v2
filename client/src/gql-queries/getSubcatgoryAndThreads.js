@@ -7,11 +7,19 @@ export default gql`
          title,
          description,
          threads {
+            created_at,
+            postCount,
             id,
             title,
             creator {
                id
                username
+            },
+            lastPost {
+               created_at
+               user {
+                  username
+               }
             }
          }
       }

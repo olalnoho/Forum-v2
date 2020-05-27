@@ -50,6 +50,8 @@ module.exports = `
       creator: User
       posts: [Post!]
       postCount: Int!
+      lastPost: Post
+      created_at: String!
    }
 
    type ThreadCreate {
@@ -63,6 +65,7 @@ module.exports = `
    type Post {
       id: ID!
       content: String!
+      created_at: String!
       user: User
    }
 
