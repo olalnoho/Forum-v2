@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 const CategoryBody = ({ categories }) => {
-   const time = categories[0].latestpost
    const dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'short', day: '2-digit' }) 
    if (!categories) return <> </>
    return (

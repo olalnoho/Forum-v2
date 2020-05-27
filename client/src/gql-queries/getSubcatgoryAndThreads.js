@@ -6,6 +6,7 @@ export default gql`
          title,
          description,
          threads {
+            id,
             title,
             creator {
             username

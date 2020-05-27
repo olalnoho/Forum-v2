@@ -19,7 +19,7 @@ const useAuth = () => {
    }, [error, logout])
 
    // @note
-   // We're exporing loading because other components
+   // We're exporting loading because other components
    // might want to know when the request is done - like the header for links.
 
    return {

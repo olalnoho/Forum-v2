@@ -1,11 +1,11 @@
 import React from 'react'
-
-const Thread = ({ x }) => {
+import { Link } from 'react-router-dom'
+const Thread = ({ thread }) => {
    return (
       <li className="thread">
          <div className="thread__info">
-            <a href="#!"> {x.title} </a>
-            <p className="info-text"> Made by: {x.creator.username} </p>
+            <Link to={`/thread/${thread.id}`}> {thread.title} </Link>
+            <p className="info-text"> Made by: {thread.creator.username} </p>
          </div>
          <div className="thread__posts">
             <span>20 replies</span>

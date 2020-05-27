@@ -1,0 +1,29 @@
+.threadview {
+   & > a {
+      font-size: 1.4rem;
+   }
+   & > * {
+      &:not(:last-child) {
+         margin-bottom: 1.5rem;
+      }
+   }
+   &__header {
+   }
+   &__actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      a {
+         font-size: 1.4rem;
+         display: inline-flex;
+         &:not(:last-child) {
+            margin-right: 1rem;
+         }
+      }
+   }
+
+   &__posts {
+      min-height: 80vh;
+      background-color: lighten($dark-main, 2%);
+   }
+}

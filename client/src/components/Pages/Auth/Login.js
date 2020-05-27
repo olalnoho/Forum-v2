@@ -6,8 +6,6 @@ import useForm from '../../../hooks/useForm'
 import formatError from '../../../utils/formatErrors'
 import { AuthContext } from '../../../contexts/AuthContext'
 
-// @todo
-// Later redirect users if they are logged in
 const Login = () => {
    const { isAuth, login } = useContext(AuthContext)
    const [errors, setErrors] = useState([])

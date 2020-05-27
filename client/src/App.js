@@ -9,6 +9,7 @@ import Footer from './components/UI/Footer/Footer';
 
 import useAuth from './hooks/useAuth'
 import CreateThread from './components/Pages/CreateThread/CreateThread';
+import Thread from './components/Pages/Thread/Thread';
 
 function App() {
   const { loading } = useAuth()
@@ -25,6 +26,7 @@ function App() {
         */}
           <Route exact path="/category/:id" component={Category} />
           <Route path="/category/:id/create" component={CreateThread} />
+          <Route path="/thread/:id" component={Thread} />
         </Switch>
       </div>
       <Footer />

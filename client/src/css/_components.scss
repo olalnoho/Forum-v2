@@ -15,6 +15,7 @@
 }
 
 .btn {
+   display: inline-flex;
    padding: 1rem 2rem;
    &--primary {
       background-color: rgb(67, 100, 73) !important;

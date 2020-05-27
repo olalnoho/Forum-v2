@@ -14,7 +14,7 @@
    }
 
    &__back {
-      margin-bottom: 3rem;
+      margin-bottom: 1.5rem;
       a {
          font-size: 1.4rem;
       }
@@ -79,9 +79,6 @@
             justify-content: center;
             flex-direction: column;
             align-items: center;
-            span {
-               margin-bottom: 1rem;
-            }
          }
          &__user {
             flex: 1;
