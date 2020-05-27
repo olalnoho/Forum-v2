@@ -1,4 +1,5 @@
 const { User } = require('./user')
+const { Post } = require('./post')
 const getUserId = require('../utils/getIdFromToken')
 
 exports.resolver = {
@@ -12,7 +13,7 @@ exports.resolver = {
       }
    },
 
-   async getWholeThread({ id }, ctx) {
+   async getThreadById({ id }, ctx) {
       try {
          const [thread] = await ctx.db('thread').where({ id })
          if (!thread) throw new Error('There is no thread with that id')
@@ -29,18 +30,19 @@ exports.resolver = {
       })
       try {
          const userId = getUserId(ctx.req.headers)
-         const res = await ctx.db('thread').insert({
+         await ctx.db('thread').insert({
             started_by: userId,
             subcategory_id,
             title,
             content
          })
          const [{ threadId }] = await ctx.db.raw('SELECT last_insert_rowid() as threadId FROM thread');
-         const t = new Thread({ id: threadId, content, title })
+         const t = new Thread({ id: threadId, content, title }, ctx)
          t.success = true
          return t
       } catch (err) {
          console.log(err)
+         throw new Error(err)
       }
    }
 }
@@ -48,21 +50,22 @@ exports.resolver = {
 class Thread {
    constructor({ id, title, content, started_by }, ctx) {
       Object.assign(this, {
-         id, title, content, started_by, ...ctx
+         id, title, content, started_by, ctx
       })
    }
 
    async creator() {
-      const [u] = await this.userLoader.load(this.started_by)
+      const [u] = await this.ctx.userLoader.load(this.started_by)
       return new User(u)
    }
 
    async posts() {
       try {
-         const posts = await this.db('post').where({ thread_id: this.id })
-         return posts
+         const posts = await this.ctx.postLoader.load(this.id)
+         return (posts || []).map(x => new Post(x, this.ctx))
       } catch (err) {
-         console.log('Could not fetch posts from thread' + this.id)
+         console.log('Could not fetch posts from thread ' + this.id)
+         throw new Error(err)
       }
    }
 }

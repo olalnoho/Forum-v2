@@ -1,4 +1,5 @@
 .threadview {
+   padding: 1rem;
    & > a {
       font-size: 1.4rem;
    }
@@ -8,6 +9,14 @@
       }
    }
    &__header {
+      h2 {
+         font-size: 2.2rem;
+         margin-bottom: 0.5rem;
+      }
+      span {
+         font-size: 1.4rem;
+         color: #888;
+      }
    }
    &__actions {
       display: flex;
@@ -24,6 +33,5 @@
 
    &__posts {
       min-height: 80vh;
-      background-color: lighten($dark-main, 2%);
    }
 }

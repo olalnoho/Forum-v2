@@ -637,12 +637,26 @@ input[type="password"] {
   }
 }
 
+.threadview {
+  padding: 1rem;
+}
+
 .threadview > a {
   font-size: 1.4rem;
 }
 
 .threadview > *:not(:last-child) {
   margin-bottom: 1.5rem;
+}
+
+.threadview__header h2 {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.threadview__header span {
+  font-size: 1.4rem;
+  color: #888;
 }
 
 .threadview__actions {
@@ -670,7 +684,6 @@ input[type="password"] {
 
 .threadview__posts {
   min-height: 80vh;
-  background-color: #1c1e1e;
 }
 
 * {

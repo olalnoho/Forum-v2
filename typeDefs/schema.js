@@ -9,7 +9,7 @@ module.exports = `
       getSubcategoryById(id: ID!): Subcategory
 
       getAllThreadsInSubcategory(id: ID!): [Thread!]
-      getWholeThread(id: ID!): Thread!
+      getThreadById(id: ID!): Thread!
    }
 
    type Mutation {
