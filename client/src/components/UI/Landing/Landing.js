@@ -1,27 +1,21 @@
 import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
-import getAllCategories from '../../../gql-queries/allCategories'
+// import getAllCategories from '../../../gql-queries/allCategories'
+import getLandingData from '../../../gql-queries/getLandingData'
 import CategoryHeader from './CategoryHeader'
 import CategoryBody from './CategoryBody'
 
-// const MOCK_DATA = [
-//    { name: 'WEB DESIGN RESOURCE', topics: ['First category', 'Second category'] },
-//    { name: 'WEB DEVELOPMENT', topics: ['First category', 'Second category'] },
-//    { name: 'SEO, WEBSITE MARKETING AND BUSINESS', topics: ['First category', 'Second category'] },
-//    { name: 'SOFTWARE & HARDWARE', topics: ['First category', 'Second category'] },
-// ]
-
 const Landing = () => {
-   const { data } = useQuery(getAllCategories)
+   const { data } = useQuery(getLandingData)
    return (
       <div className="container">
-         {data && data.getAllCategories &&
+         {data && data.landingInfo &&
             <ol>
-               {data.getAllCategories.map(x =>
+               {data.landingInfo.map(x =>
                   (
-                     <li key={x.id} className="section">
+                     <li key={x.title} className="section">
                         <CategoryHeader text={x.title} />
-                        <CategoryBody categories={x.subcategories} />
+                        {x.subcategories.length > 0 && <CategoryBody categories={x.subcategories} />}
                      </li>
                   )
                )}

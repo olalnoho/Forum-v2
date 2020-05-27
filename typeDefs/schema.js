@@ -1,5 +1,7 @@
 module.exports = `
    type Query {
+      landingInfo: [LandingCategoryInfo!]
+
       getUserById(id: ID!): User
       getCurrentUser: User
 
@@ -61,5 +63,19 @@ module.exports = `
       id: ID!
       content: String!
       user: User
+   }
+
+   type LandingCategoryInfo {
+      title: String!
+      subcategories: [LandingSubcategoryInfo!]
+   }
+
+   type LandingSubcategoryInfo {
+      id: ID!
+      title: String!
+      description: String!
+      poster: String
+      postcount: Int!
+      latestpost: String
    }
 `

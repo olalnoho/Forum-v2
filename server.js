@@ -38,6 +38,7 @@ app.use('/graphql',
          threadLoader: new DataLoader(loader('thread', 'subcategory_id')),
          // thread -> user relationship
          userLoader: new DataLoader(loader('user', 'id')),
+         // postcount for all subcats in cat 
          postCountLoader: new DataLoader(postCountLoader)
       }
    }))

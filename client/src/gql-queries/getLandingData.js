@@ -2,14 +2,15 @@ import { gql } from 'apollo-boost'
 
 export default gql`
    query {
-      getAllCategories {
-         id,
+      landingInfo {
          title,
          subcategories {
             id,
             title,
-            description,
-            postCount
+            postcount,
+            poster,
+            latestpost,
+            description
          }
       }
    }
