@@ -25,7 +25,7 @@ exports.resolver = {
 
    async createThread({ title, content, subcategory_id }, ctx) {
       [title, content, subcategory_id].forEach(x => {
-         if(!x.trim()) throw new Error('Invalid data')
+         if (!x.trim()) throw new Error('Invalid data')
       })
       try {
          const userId = getUserId(ctx.req.headers)
@@ -36,7 +36,9 @@ exports.resolver = {
             content
          })
          const [{ threadId }] = await ctx.db.raw('SELECT last_insert_rowid() as threadId FROM thread');
-         return new Thread({ id: threadId, content, title })
+         const t = new Thread({ id: threadId, content, title })
+         t.success = true
+         return t
       } catch (err) {
          console.log(err)
       }

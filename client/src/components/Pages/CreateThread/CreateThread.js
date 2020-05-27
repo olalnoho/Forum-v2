@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks'
 import createThreadMutation from '../../../gql-queries/createThread'
 import useForm from '../../../hooks/useForm'
 import getSubcatgoryAndThreads from '../../../gql-queries/getSubcatgoryAndThreads'
+import Spinner from '../../UI/Spinner/Spinner'
 import formatErrors from '../../../utils/formatErrors'
 
 const CreateThread = ({
@@ -11,22 +12,29 @@ const CreateThread = ({
    history
 }) => {
    const [errors, setErrors] = useState([])
-   const [createThread, { error: mutationError }] = useMutation(createThreadMutation)
+   const [createThread, { error: mutationError, data: mutationData, loading }] = useMutation(createThreadMutation)
    const { inputHandler, formState } = useForm({
       title: '',
       content: ''
    })
 
    useEffect(() => {
-      if(mutationError) setErrors(mutationError.networkError.result.errors)
+      if (mutationError) setErrors(mutationError.networkError.result.errors)
    }, [mutationError])
+
+   useEffect(() => {
+      if (mutationData && mutationData.createThread.success === true) {
+         history.push(`/category/${id}`)
+      }
+   }, [mutationData, history, id])
 
    const submitHandler = async e => {
       e.preventDefault()
       try {
          await createThread({
             variables: { ...formState, subcategory_id: id },
-            refetchQueries: [{ query: getSubcatgoryAndThreads, variables: { id } }]
+            refetchQueries: [{ query: getSubcatgoryAndThreads, variables: { id } }],
+            awaitRefetchQueries: true
          })
       } catch (error) {
          console.log(error)
@@ -51,7 +59,7 @@ const CreateThread = ({
                      <textarea onChange={inputHandler} name="content" rows="15"></textarea>
                   </div>
                   <div className="formfield">
-                     <input type="submit" className="btn btn--primary" value="Submit" />
+                     {loading ? <Spinner /> :  <input type="submit" className="btn btn--primary" value="Submit" />}
                   </div>
                </div>
             </form>

@@ -7,6 +7,13 @@
       textarea {
          max-width: 100%;
       }
+
+      .Loader {
+         align-self: flex-start;
+         width: 5rem;
+         height: 5rem;
+         margin: 0;
+      }
    }
 
    .btn {
