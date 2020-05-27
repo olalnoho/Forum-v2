@@ -8,7 +8,7 @@ const Thread = ({ x }) => {
             <p className="info-text"> Made by: {x.creator.username} </p>
          </div>
          <div className="thread__posts">
-            <span>{x.replies} replies</span>
+            <span>20 replies</span>
             {/* <p className="info-text">{x.views} views</p> */}
          </div>
          <div className="thread__user">

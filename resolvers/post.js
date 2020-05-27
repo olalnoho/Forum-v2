@@ -1,4 +1,8 @@
-exports.resolver = {}
+exports.resolver = {
+   async createPost({ content, thread_id }, ctx) {
+      
+   }
+}
 
 class Post {
    constructor({ id, content }) {

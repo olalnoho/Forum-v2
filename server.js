@@ -9,9 +9,11 @@ const root = require('./resolvers/')
 const typeDefs = require('./typeDefs/schema')
 
 const loader = require('./dataloaders/loader')
+const postCountLoader = require('./dataloaders/postCountLoader')
 
 const schema = buildSchema(typeDefs)
 const app = express();
+
 app.use(cors())
 const gqlOptions = {
    schema,
@@ -36,6 +38,7 @@ app.use('/graphql',
          threadLoader: new DataLoader(loader('thread', 'subcategory_id')),
          // thread -> user relationship
          userLoader: new DataLoader(loader('user', 'id')),
+         postCountLoader: new DataLoader(postCountLoader)
       }
    }))
 )

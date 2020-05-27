@@ -38,6 +38,7 @@ module.exports = `
       title: String!
       description: String!
       threads: [Thread!]
+      postCount: Int
    }
 
    type Thread {
