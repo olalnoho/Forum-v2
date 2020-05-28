@@ -36,7 +36,7 @@ app.use('/graphql',
          // category -> subcategory relationship
          subcatLoader: new DataLoader(loader('subcategory', 'category_id')),
          // subcategory -> thread relationship
-         threadLoader: new DataLoader(loader('thread', 'subcategory_id')),
+         threadLoader: new DataLoader(loader('thread', 'subcategory_id', 'updated_at', 'desc')),
          // thread -> user relationship
          userLoader: new DataLoader(loader('user', 'id')),
          // thread -> post relationship

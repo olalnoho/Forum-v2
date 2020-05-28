@@ -6,6 +6,7 @@ module.exports = async keys => {
       .count('post.id')
       .whereIn('thread.id', keys)
       .innerJoin('post', 'post.thread_id', 'thread.id')
+      .groupBy('thread.id')
    const map = {}
    res.forEach(x => {
       const key = x.id

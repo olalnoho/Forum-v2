@@ -14,5 +14,6 @@ module.exports = (table, comparer) => async keys => {
          map[key] = [x]
       }
    })
+
    return keys.map(x => map[x])
 }

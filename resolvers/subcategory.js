@@ -26,7 +26,7 @@ class Subcategory {
    async threads() {
       const thread = await this.ctx.threadLoader.load(this.id)
       return thread ? thread.sort(
-         (a, b) => new Date(b.created_at) - new Date(a.created_at)
+         (a, b) => new Date(b.updated_at) - new Date(a.updated_at)
       ).map(x => new Thread(x, this.ctx)) : null
    }
 
