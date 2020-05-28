@@ -11,9 +11,10 @@ const Category = ({
    location: { pathname: currentUrl }
 }) => {
    const { isAuth } = useContext(AuthContext)
-   const { data } = useQuery(getSubcatgoryAndThreads, { variables: { id } })
+   const { data, error: queryError } = useQuery(getSubcatgoryAndThreads, { variables: { id } })
    return (
       <div className="container">
+         {queryError && <h2 className="heading-2"> Could not find category. </h2>}
          {data && <div className="subsection">
             <div className="subsection__back">
                <Link className="btn btn--light" to={'/'}>Go Back</Link>

@@ -35,6 +35,7 @@ const Thread = ({
       <div className="container">
          <div className="threadview">
             <Link className="btn btn--light" to="/">Go Back</Link>
+            {queryError && <h2 className="heading-2"> Could not find Thread. </h2>}
             {data &&
                <>
                   <div className="threadview__header">
