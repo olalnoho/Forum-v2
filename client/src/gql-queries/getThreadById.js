@@ -17,6 +17,7 @@ export default gql`
             content,
             created_at,
             user {
+               id,
                username
             }
          }

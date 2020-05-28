@@ -30,21 +30,26 @@ const CreateThread = ({
 
    const submitHandler = async e => {
       e.preventDefault()
-      try {
-         await createThread({
-            variables: { ...formState, subcategory_id: id },
-            refetchQueries: [{ query: getSubcatgoryAndThreads, variables: { id } }],
-            awaitRefetchQueries: true
-         })
-      } catch (error) {
-         console.log(error)
-      }
+      createThread({
+         variables: { ...formState, subcategory_id: id },
+         update: (store, { data: { createThread: thread } }) => {
+            const storeData = store.readQuery({ query: getSubcatgoryAndThreads, variables: { id } })
+            if (!storeData) return
+            Object.assign(thread, {
+               created_at: new Date(),
+               lastPost: null,
+               postCount: 0
+            })
+            storeData.getSubcategoryById.threads = [thread, ...storeData.getSubcategoryById.threads]
+            store.writeQuery({ query: getSubcatgoryAndThreads, variables: { id }, data: storeData })
+         }
+      })
    }
    return (
       <div className="container">
          <div className="createthread">
             <button onClick={history.goBack} className="btn btn--light btn--back">
-            <i className="fas fa-arrow-left"></i>
+               <i className="fas fa-arrow-left"></i>
                Go Back
             </button>
             <form className="form" onSubmit={submitHandler}>

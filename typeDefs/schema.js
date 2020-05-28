@@ -60,7 +60,8 @@ module.exports = `
       id: ID!
       title: String!
       content: String!
-      creator: User
+      creator: User!
+      created_at: String
       success: Boolean!
    }
 

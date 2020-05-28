@@ -4,6 +4,8 @@ import { useQuery, useMutation } from '@apollo/react-hooks'
 import Spinner from '../../UI/Spinner/Spinner'
 import useForm from '../../../hooks/useForm'
 import getThreadById from '../../../gql-queries/getThreadById'
+import getLandingData from '../../../gql-queries/getLandingData'
+import getSubcategoryById from '../../../gql-queries/getSubcatgoryAndThreads'
 import createPost from '../../../gql-queries/createPost'
 import Post from './Post'
 import formatDate from '../../../utils/formatDate'
@@ -14,30 +16,36 @@ const Thread = ({
       content: ''
    })
    const { data, error: queryError } = useQuery(getThreadById, { variables: { id } })
-   const [createPostMutation, { data: mutationData, error: mutationError, loading }] = useMutation(createPost)
+   const [createPostMutation, { error: mutationError, loading }] = useMutation(createPost)
    useEffect(() => {
       mutationError && console.dir(mutationError)
    }, [mutationError])
 
    const submitHandler = async e => {
       e.preventDefault()
+      // @note
+      // refetching getLandingData and getSubcategoryById
+      // is only for post count - make better dawg.
       await createPostMutation({
          variables: { thread_id: id, ...formState }, refetchQueries: [{
             query: getThreadById,
             variables: { id }
+         }, {
+            query: getLandingData
+         }, {
+            query: getSubcategoryById,
+            variables: { id: data.getThreadById.subcategory_id }
          }],
-         awaitRefetchQueries: true
+         awaitRefetchQueries: true,
       })
       clearInput()
    }
-
-   console.log(data)
 
    return (
       <div className="container">
          <div className="threadview">
             {data && <Link className="btn btn--light btn--back" to={`/category/${data.getThreadById.subcategory_id}`}>
-            <i className="fas fa-arrow-left"></i>
+               <i className="fas fa-arrow-left"></i>
                Go Back
             </Link>}
             {queryError && <h2 className="heading-2"> Could not find Thread. </h2>}

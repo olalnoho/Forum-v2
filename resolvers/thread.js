@@ -37,7 +37,7 @@ exports.resolver = {
             content
          })
          const [{ threadId }] = await ctx.db.raw('SELECT last_insert_rowid() as threadId FROM thread');
-         const t = new Thread({ id: threadId, content, title }, ctx)
+         const t = new Thread({ id: threadId, content, title, started_by: userId }, ctx)
          t.success = true
          return t
       } catch (err) {
@@ -69,14 +69,14 @@ class Thread {
       }
    }
 
-   async postCount(){
+   async postCount() {
       const res = await this.ctx.threadPostCountLoader.load(this.id)
       return res || 0
    }
 
    async lastPost() {
       const [lastPost] = await this.ctx.db('post')
-         .where('thread_id', this.id) 
+         .where('thread_id', this.id)
          .orderBy('created_at', 'desc')
          .limit(1)
       return lastPost ? new Post(lastPost, this.ctx) : null

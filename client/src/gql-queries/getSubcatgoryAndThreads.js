@@ -16,8 +16,10 @@ export default gql`
                username
             },
             lastPost {
+               id,
                created_at
                user {
+                  id
                   username
                }
             }
