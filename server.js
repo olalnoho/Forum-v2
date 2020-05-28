@@ -16,6 +16,7 @@ const schema = buildSchema(typeDefs)
 const app = express();
 
 app.use(cors())
+
 const gqlOptions = {
    schema,
    rootValue: root,
@@ -36,13 +37,14 @@ app.use('/graphql',
          // category -> subcategory relationship
          subcatLoader: new DataLoader(loader('subcategory', 'category_id')),
          // subcategory -> thread relationship
-         threadLoader: new DataLoader(loader('thread', 'subcategory_id', 'updated_at', 'desc')),
+         threadLoader: new DataLoader(loader('thread', 'subcategory_id')),
          // thread -> user relationship
          userLoader: new DataLoader(loader('user', 'id')),
          // thread -> post relationship
          postLoader: new DataLoader(loader('post', 'thread_id')),
          // postcount for all subcats in cat 
          subcatPostCountLoader: new DataLoader(subcatPostCountLoader),
+         // postcount for individual threads
          threadPostCountLoader: new DataLoader(threadPostCountLoader)
       }
    }))

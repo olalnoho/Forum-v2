@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom'
 import { useQuery } from '@apollo/react-hooks'
 import getThreadById from '../../../gql-queries/getThreadById'
 import Post from './Post'
+import formatDate from '../../../utils/formatDate'
 const Thread = ({
    match: { params: { id } }
 }) => {
    const { data } = useQuery(getThreadById, { variables: { id } })
-   const dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'short', day: '2-digit' }) 
+   console.log(data)
    return (
       <div className="container">
          <div className="threadview">
@@ -16,7 +17,7 @@ const Thread = ({
                <>
                   <div className="threadview__header">
                      <h2> {data.getThreadById.title} </h2>
-                     <span>By: {data.getThreadById.creator.username}, at {new Date().toLocaleDateString()} </span>
+                     <span>By: {data.getThreadById.creator.username} - {formatDate(data.getThreadById.created_at)} </span>
                      <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ornare lectus sit amet est placerat in egestas. Blandit cursus risus at ultrices mi. Libero enim sed faucibus turpis. Placerat vestibulum lectus mauris ultrices eros in. Aliquet enim tortor at auctor urna. Platea dictumst vestibulum rhoncus est pellentesque. Purus sit amet volutpat consequat mauris nunc congue nisi. Etiam tempor orci eu lobortis elementum nibh tellus molestie. </p>
                   </div>
                   <div className="threadview__actions">

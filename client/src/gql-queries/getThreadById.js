@@ -6,6 +6,7 @@ export default gql`
          id,
          title,
          content,
+         created_at,
          creator {
             id,
             username
@@ -13,6 +14,7 @@ export default gql`
          posts {
             id,
             content,
+            created_at,
             user {
                username
             }

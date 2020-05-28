@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import formatDate from '../../../utils/formatDate'
 const CategoryBody = ({ categories }) => {
-   const dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'short', day: '2-digit' }) 
    if (!categories) return <> </>
    return (
       <ul className="section__body">
@@ -22,7 +22,7 @@ const CategoryBody = ({ categories }) => {
                   <div>
                      <span >Last post: </span>
                      {x.poster && <p>{x.poster}</p>}
-                     <p>{x.latestpost ? dateTimeFormat.format(new Date(x.latestpost)) : 'No posts yet'}</p>
+                     <p>{x.latestpost ? formatDate(new Date(x.latestpost)) : 'No posts yet'}</p>
                   </div>
                </div>
             </li>

@@ -740,6 +740,11 @@ textarea {
   border-radius: 50%;
 }
 
+.post__content {
+  padding: 1rem;
+  font-size: 1.5rem;
+}
+
 * {
   margin: 0;
   padding: 0;

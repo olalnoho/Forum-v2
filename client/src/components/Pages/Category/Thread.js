@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import formatDate from '../../../utils/formatDate'
 const Thread = ({ thread }) => {
-   const dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'short', day: '2-digit' })
    return (
       <li className="thread">
          <div className="thread__info">
@@ -15,7 +15,7 @@ const Thread = ({ thread }) => {
          <div className="thread__user">
             <span> Last post by {thread.lastPost ? thread.lastPost.user.username : thread.creator.username} </span>
             <p className="info-text"> {
-               dateTimeFormat.format(new Date(thread.lastPost ? thread.lastPost.created_at : thread.created_at))
+               formatDate(thread.lastPost ? thread.lastPost.created_at : thread.created_at)
             }</p>
          </div>
       </li>
