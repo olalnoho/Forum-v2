@@ -7,6 +7,7 @@ export default gql`
          title,
          content,
          created_at,
+         subcategory_id,
          creator {
             id,
             username

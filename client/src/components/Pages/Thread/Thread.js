@@ -31,13 +31,15 @@ const Thread = ({
       clearInput()
    }
 
+   console.log(data)
+
    return (
       <div className="container">
          <div className="threadview">
-            <Link className="btn btn--light btn--back" to="/">
+            {data && <Link className="btn btn--light btn--back" to={`/category/${data.getThreadById.subcategory_id}`}>
             <i className="fas fa-arrow-left"></i>
                Go Back
-            </Link>
+            </Link>}
             {queryError && <h2 className="heading-2"> Could not find Thread. </h2>}
             {data &&
                <>
@@ -47,7 +49,7 @@ const Thread = ({
                      <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ornare lectus sit amet est placerat in egestas. Blandit cursus risus at ultrices mi. Libero enim sed faucibus turpis. Placerat vestibulum lectus mauris ultrices eros in. Aliquet enim tortor at auctor urna. Platea dictumst vestibulum rhoncus est pellentesque. Purus sit amet volutpat consequat mauris nunc congue nisi. Etiam tempor orci eu lobortis elementum nibh tellus molestie. </p>
                   </div>
                   <div className="threadview__actions">
-                     <Link className="btn btn--light" to="#!">Start new thread</Link>
+                     <Link className="btn btn--light" to={`/category/${data.getThreadById.subcategory_id}/create`}>Start new thread</Link>
                      <a className="btn btn--primary" href="#threadreply">Reply to this thread</a>
                   </div>
                   <div className="threadview__posts">

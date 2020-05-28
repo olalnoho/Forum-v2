@@ -53,6 +53,7 @@ module.exports = `
       postCount: Int!
       lastPost: Post
       created_at: String!
+      subcategory_id: ID!
    }
 
    type ThreadCreate {
