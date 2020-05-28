@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 const Thread = ({ thread }) => {
-   console.log(thread)
+   const dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'short', day: '2-digit' })
    return (
       <li className="thread">
          <div className="thread__info">
@@ -14,9 +14,9 @@ const Thread = ({ thread }) => {
          </div>
          <div className="thread__user">
             <span> Last post by {thread.lastPost ? thread.lastPost.user.username : thread.creator.username} </span>
-            <p className="info-text"> {new Date(
-               thread.lastPost ? thread.lastPost.created_at : thread.created_at
-            ).toLocaleDateString('en-us')}</p>
+            <p className="info-text"> {
+               dateTimeFormat.format(new Date(thread.lastPost ? thread.lastPost.created_at : thread.created_at))
+            }</p>
          </div>
       </li>
    )

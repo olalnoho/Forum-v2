@@ -25,7 +25,9 @@ class Subcategory {
 
    async threads() {
       const thread = await this.ctx.threadLoader.load(this.id)
-      return thread ? thread.map(x => new Thread(x, this.ctx)) : null
+      return thread ? thread.sort(
+         (a, b) => new Date(b.created_at) - new Date(a.created_at)
+      ).map(x => new Thread(x, this.ctx)) : null
    }
 
    async postCount() {

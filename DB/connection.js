@@ -9,8 +9,8 @@ const db = require('knex')({
 // @note
 // For debug
 
-db.on('query', data => {
-   console.log(data)
-})
+// db.on('query', data => {
+//    console.log(data)
+// })
 
 module.exports = db

@@ -37,8 +37,13 @@ CREATE TABLE post (
    user_id INTEGER NOT NULL,
    thread_id NOT NULL,
    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-   FOREIGN KEY(user_id) REFERENCES user(id),
-   FOREIGN KEY(thread_id) REFERENCES thread(id)
+   
+   CONSTRAINT thread_fk
+      FOREIGN KEY(thread_id) 
+      REFERENCES thread(id)
+      ON DELETE CASCADE,
+
+   FOREIGN KEY(user_id) REFERENCES user(id)
 );
 
 
