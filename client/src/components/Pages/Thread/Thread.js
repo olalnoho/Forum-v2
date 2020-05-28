@@ -1,14 +1,36 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery, useMutation } from '@apollo/react-hooks'
+import Spinner from '../../UI/Spinner/Spinner'
+import useForm from '../../../hooks/useForm'
 import getThreadById from '../../../gql-queries/getThreadById'
+import createPost from '../../../gql-queries/createPost'
 import Post from './Post'
 import formatDate from '../../../utils/formatDate'
 const Thread = ({
    match: { params: { id } }
 }) => {
-   const { data } = useQuery(getThreadById, { variables: { id } })
-   console.log(data)
+   const { formState, inputHandler, clearInput } = useForm({
+      content: ''
+   })
+   const { data, error: queryError } = useQuery(getThreadById, { variables: { id } })
+   const [createPostMutation, { data: mutationData, error: mutationError, loading }] = useMutation(createPost)
+   useEffect(() => {
+      mutationError && console.dir(mutationError)
+   }, [mutationError])
+
+   const submitHandler = async e => {
+      e.preventDefault()
+      await createPostMutation({
+         variables: { thread_id: id, ...formState }, refetchQueries: [{
+            query: getThreadById,
+            variables: { id }
+         }],
+         awaitRefetchQueries: true
+      })
+      clearInput()
+   }
+
    return (
       <div className="container">
          <div className="threadview">
@@ -28,25 +50,26 @@ const Thread = ({
                      {data.getThreadById.posts.map(x => <Post key={x.id} post={x} />)}
                   </div>
                   <div className="threadview__reply" id="threadreply">
-                     <form className="form">
+                     <form className="form" onSubmit={submitHandler}>
                         <div className="formheader">
                            <h3>Join the conversation</h3>
                         </div>
                         <div className="formbody">
-
                            <div className="formfield">
                               <label>Message</label>
-                              <textarea rows="6"></textarea>
+                              <textarea value={formState.content} onChange={inputHandler} name="content" rows="6"></textarea>
                            </div>
                            <div className="formfield">
-                              <input className="btn btn--primary" type="submit" value="Submit" />
+                              {loading ?
+                                 <Spinner className="formLoader" /> :
+                                 <input className="btn btn--primary" type="submit" value="Submit" />
+                              }
                            </div>
                         </div>
                      </form>
                   </div>
                </>
             }
-
          </div>
       </div>
    )

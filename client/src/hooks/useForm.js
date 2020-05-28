@@ -7,9 +7,14 @@ const useForm = (initValues = {}) => {
       setFormState({...formState, [e.target.name]: e.target.value})
    }
 
+   const clearInput = e => {
+      setFormState(initValues)
+   }
+
    return {
       inputHandler,
-      formState
+      formState,
+      clearInput
    }
 }
 

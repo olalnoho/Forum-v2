@@ -31,8 +31,8 @@ exports.resolver = {
       try {
          const userId = getUserId(ctx.req.headers)
          await ctx.db('thread').insert({
-            started_by: userId,
-            subcategory_id,
+            started_by: Number(userId),
+            subcategory_id: Number(subcategory_id),
             title,
             content
          })

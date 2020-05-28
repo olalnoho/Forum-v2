@@ -16,6 +16,7 @@ module.exports = `
       registerUser(email: String! username: String! password: String!): Auth!
       loginUser(username: String! password: String!): Auth!
       createThread(title: String! content: String! subcategory_id: ID!): ThreadCreate!
+      createPost(content: String! thread_id: ID!): Boolean!
    }
 
    type User {

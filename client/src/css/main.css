@@ -70,6 +70,14 @@ textarea {
   font-size: 1.4rem;
 }
 
+.formLoader {
+  -ms-flex-item-align: start !important;
+      align-self: flex-start !important;
+  width: 5rem !important;
+  height: 5rem !important;
+  margin: 0 !important;
+}
+
 .heading-2 {
   font-size: 3rem;
 }
@@ -614,14 +622,6 @@ textarea {
 
 .createthread .form textarea {
   max-width: 100%;
-}
-
-.createthread .form .Loader {
-  -ms-flex-item-align: start;
-      align-self: flex-start;
-  width: 5rem;
-  height: 5rem;
-  margin: 0;
 }
 
 .createthread .btn {

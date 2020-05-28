@@ -59,7 +59,7 @@ const CreateThread = ({
                      <textarea onChange={inputHandler} name="content" rows="15"></textarea>
                   </div>
                   <div className="formfield">
-                     {loading ? <Spinner /> :  <input type="submit" className="btn btn--primary" value="Submit" />}
+                     {loading ? <Spinner className="formLoader" /> :  <input type="submit" className="btn btn--primary" value="Submit" />}
                   </div>
                </div>
             </form>

@@ -1,6 +1,21 @@
+const getUserId = require('../utils/getIdFromToken')
+
 exports.resolver = {
    async createPost({ content, thread_id }, ctx) {
+      const user_id = getUserId(ctx.req.headers, true)
+      if(!content.trim() || !thread_id.trim()) throw new Error('Invalid data')
 
+      try {
+         await ctx.db('post').insert({
+            content,
+            user_id: Number(user_id),
+            thread_id: Number(thread_id),
+         })
+         return true
+      } catch (err) {
+         console.log('Error inserting post')
+         throw new Error(err)
+      }
    }
 }
 
