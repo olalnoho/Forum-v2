@@ -20,6 +20,7 @@ CREATE TABLE thread (
    content TEXT NOT NULL,
    started_by INT NOT NULL,
    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
    CONSTRAINT subc_fk
       FOREIGN KEY(subcategory_id)
