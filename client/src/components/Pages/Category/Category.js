@@ -17,7 +17,10 @@ const Category = ({
          {queryError && <h2 className="heading-2"> Could not find category. </h2>}
          {data && <div className="subsection">
             <div className="subsection__back">
-               <Link className="btn btn--light" to={'/'}>Go Back</Link>
+               <Link className="btn btn--light btn--back" to={'/'}>
+                  <i className="fas fa-arrow-left"></i>
+                  Go Back
+               </Link>
             </div>
             <div className="subsection__header">
                <h2>{data.getSubcategoryById.title}</h2>

@@ -27,6 +27,13 @@
    &--light {
       background-color: $light-main !important;
    }
+
+   &--back {
+      align-items: center;
+      i {
+         margin-right: 1rem;
+      }
+   }
 }
 
 .relative {

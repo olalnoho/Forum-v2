@@ -49,6 +49,16 @@
   background-color: #303333 !important;
 }
 
+.btn--back {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.btn--back i {
+  margin-right: 1rem;
+}
+
 .relative {
   position: relative;
 }

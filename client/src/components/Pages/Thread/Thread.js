@@ -34,7 +34,10 @@ const Thread = ({
    return (
       <div className="container">
          <div className="threadview">
-            <Link className="btn btn--light" to="/">Go Back</Link>
+            <Link className="btn btn--light btn--back" to="/">
+            <i className="fas fa-arrow-left"></i>
+               Go Back
+            </Link>
             {queryError && <h2 className="heading-2"> Could not find Thread. </h2>}
             {data &&
                <>

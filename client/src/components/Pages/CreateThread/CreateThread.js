@@ -43,7 +43,10 @@ const CreateThread = ({
    return (
       <div className="container">
          <div className="createthread">
-            <button onClick={history.goBack} className="btn btn--light">Go Back</button>
+            <button onClick={history.goBack} className="btn btn--light btn--back">
+            <i className="fas fa-arrow-left"></i>
+               Go Back
+            </button>
             <form className="form" onSubmit={submitHandler}>
                <div className="formheader">
                   <h2>Create a thread</h2>
@@ -56,10 +59,10 @@ const CreateThread = ({
                   </div>
                   <div className="formfield">
                      <label>Message </label>
-                     <textarea onChange={inputHandler} name="content" rows="15"></textarea>
+                     <textarea onChange={inputHandler} name="content" rows="8"></textarea>
                   </div>
                   <div className="formfield">
-                     {loading ? <Spinner className="formLoader" /> :  <input type="submit" className="btn btn--primary" value="Submit" />}
+                     {loading ? <Spinner className="formLoader" /> : <input type="submit" className="btn btn--primary" value="Submit" />}
                   </div>
                </div>
             </form>
