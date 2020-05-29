@@ -47,7 +47,7 @@ const createQuoteNode = tag => {
    if (name) {
       const n = document.createElement('strong')
       n.classList.add('said')
-      n.textContent = name
+      n.textContent = name + ' said:'
       el.appendChild(n)
    }
    return el

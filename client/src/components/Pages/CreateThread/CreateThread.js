@@ -40,7 +40,8 @@ const CreateThread = ({
                lastPost: null,
                postCount: 0
             })
-            storeData.getSubcategoryById.threads = [thread, ...storeData.getSubcategoryById.threads]
+            const oldThreads = (storeData.getSubcategoryById.threads || [])
+            storeData.getSubcategoryById.threads = [thread, ...oldThreads]
             store.writeQuery({ query: getSubcatgoryAndThreads, variables: { id }, data: storeData })
          }
       })

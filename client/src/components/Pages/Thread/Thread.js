@@ -54,7 +54,7 @@ const Thread = ({
                   <div className="threadview__header">
                      <h2> {data.getThreadById.title} </h2>
                      <span>By: {data.getThreadById.creator.username} - {formatDate(data.getThreadById.created_at)} </span>
-                     <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ornare lectus sit amet est placerat in egestas. Blandit cursus risus at ultrices mi. Libero enim sed faucibus turpis. Placerat vestibulum lectus mauris ultrices eros in. Aliquet enim tortor at auctor urna. Platea dictumst vestibulum rhoncus est pellentesque. Purus sit amet volutpat consequat mauris nunc congue nisi. Etiam tempor orci eu lobortis elementum nibh tellus molestie. </p>
+                     <p> {data.getThreadById.content} </p>
                   </div>
                   <div className="threadview__actions">
                      <Link className="btn btn--light" to={`/category/${data.getThreadById.subcategory_id}/create`}>Start new thread</Link>
