@@ -26,6 +26,7 @@ const Thread = ({
       // @note
       // refetching getLandingData and getSubcategoryById
       // is only for post count - make better dawg.
+      if(!formState.content.trim()) return
       await createPostMutation({
          variables: { thread_id: id, ...formState }, refetchQueries: [{
             query: getThreadById,

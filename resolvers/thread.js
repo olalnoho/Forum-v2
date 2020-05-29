@@ -5,7 +5,9 @@ const getUserId = require('../utils/getIdFromToken')
 exports.resolver = {
    async getAllThreadsInSubcategory({ id }, ctx) {
       try {
-         const threads = await ctx.db('thread').where({ subcategory_id: id })
+         const threads = await ctx.db('thread')
+            .where({ subcategory_id: id })
+            .orderBy('updated_at', 'desc')
          return threads.map(t => new Thread(t, ctx))
       } catch (err) {
          console.log('Error getting threads in subcategory')

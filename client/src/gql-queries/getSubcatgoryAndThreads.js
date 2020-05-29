@@ -5,25 +5,7 @@ export default gql`
       getSubcategoryById(id: $id) {
          id
          title,
-         description,
-         threads {
-            created_at,
-            postCount,
-            id,
-            title,
-            creator {
-               id
-               username
-            },
-            lastPost {
-               id,
-               created_at
-               user {
-                  id
-                  username
-               }
-            }
-         }
+         description
       }
    }
 `

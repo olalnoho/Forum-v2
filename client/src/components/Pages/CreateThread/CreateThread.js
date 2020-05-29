@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import createThreadMutation from '../../../gql-queries/createThread'
 import useForm from '../../../hooks/useForm'
-import getSubcatgoryAndThreads from '../../../gql-queries/getSubcatgoryAndThreads'
+import getThreads from '../../../gql-queries/getAllThreadsInSubcategory'
 import Spinner from '../../UI/Spinner/Spinner'
 import formatErrors from '../../../utils/formatErrors'
 
@@ -33,16 +33,16 @@ const CreateThread = ({
       createThread({
          variables: { ...formState, subcategory_id: id },
          update: (store, { data: { createThread: thread } }) => {
-            const storeData = store.readQuery({ query: getSubcatgoryAndThreads, variables: { id } })
+            const storeData = store.readQuery({ query: getThreads, variables: { id } })
             if (!storeData) return
             Object.assign(thread, {
                created_at: new Date(),
                lastPost: null,
                postCount: 0
             })
-            const oldThreads = (storeData.getSubcategoryById.threads || [])
-            storeData.getSubcategoryById.threads = [thread, ...oldThreads]
-            store.writeQuery({ query: getSubcatgoryAndThreads, variables: { id }, data: storeData })
+            const oldThreads = (storeData.getAllThreadsInSubcategory || [])
+            storeData.getAllThreadsInSubcategory = [thread, ...oldThreads]
+            store.writeQuery({ query: getThreads, variables: { id }, data: storeData })
          }
       })
    }

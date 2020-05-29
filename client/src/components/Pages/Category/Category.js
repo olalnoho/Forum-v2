@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import Thread from './Thread'
 import Paginator from './Paginator'
 import getSubcatgoryAndThreads from '../../../gql-queries/getSubcatgoryAndThreads'
+import getThreads from '../../../gql-queries/getAllThreadsInSubcategory'
 
 const Category = ({
    match: { params: { id } },
@@ -12,6 +13,7 @@ const Category = ({
 }) => {
    const { isAuth } = useContext(AuthContext)
    const { data, error: queryError } = useQuery(getSubcatgoryAndThreads, { variables: { id } })
+   const { data: threads } = useQuery(getThreads, { variables: { id } })
    return (
       <div className="container">
          {queryError && <h2 className="heading-2"> Could not find category. </h2>}
@@ -31,9 +33,9 @@ const Category = ({
             </div>
             <Paginator />
             <div className="subsection__threads">
-               {data.getSubcategoryById.threads ?
+               {threads && threads.getAllThreadsInSubcategory.length > 0 ?
                   <ol>
-                     {data.getSubcategoryById.threads.map((x, i) => <Thread key={i} thread={x} />)}
+                     {threads.getAllThreadsInSubcategory.map((x, i) => <Thread key={i} thread={x} />)}
                   </ol> :
                   <h3 className="heading-3">No threads have been created here yet.</h3>
                }

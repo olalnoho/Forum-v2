@@ -11,7 +11,7 @@ class TagError extends Error {
       super(`Got unsupported tag ${tag}`)
    }
 }
-
+// eslint-disable-next-line
 Object.defineProperty(Array.prototype, 'last', {
    get() { return this[this.length - 1] }
 })
@@ -73,6 +73,7 @@ const parseToHtml = string => {
    const stack = [root]
    for (const token of tokens) {
       if (regex.openTag.test(token)) {
+         // eslint-disable-next-line
          const [_, tag, isQuote] = token.match(regex.getTag)
          if (!tag) throw new Error('tag missing from ' + token)
          let node;

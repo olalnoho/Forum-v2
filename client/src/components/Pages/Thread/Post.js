@@ -5,7 +5,7 @@ const Post = ({ post }) => {
       <div className="post">
          <div className="post__user">
             <span> {post.user.username} </span>
-            <img src="https://www.webdesignerforum.co.uk/uploads/set_resources_3/84c1e40ea0e759e3f1505eb1788ddf3c_default_photo.png" alt="avatar" />
+            <img src="/images/avatar-1292817_960_720.png" alt="avatar" />
             <span>1121 Posts</span>
          </div>
          <div className="post__content">
