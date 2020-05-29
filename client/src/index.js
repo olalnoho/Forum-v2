@@ -9,12 +9,11 @@ import './css/main.css'
 
 const cache = new InMemoryCache()
 
-cache.originalReadQuery = cache.readQuery
-
 // @note
 // kind of hacky but
-// readQuery will throw error if there is not cache
+// readQuery will throw error if there is no cache
 // returning null or undefined seems better.
+cache.originalReadQuery = cache.readQuery
 
 cache.readQuery = (...args) => {
   try {

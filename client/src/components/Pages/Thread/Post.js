@@ -1,5 +1,5 @@
 import React from 'react'
-
+import parseText from '../../../utils/parseToHtml'
 const Post = ({ post }) => {
    return (
       <div className="post">
@@ -9,7 +9,7 @@ const Post = ({ post }) => {
             <span>1121 Posts</span>
          </div>
          <div className="post__content">
-            <p> {post.content} </p>
+            <p dangerouslySetInnerHTML={{__html: parseText(post.content)}}></p>
          </div>
       </div>
    )
