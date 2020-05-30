@@ -8,7 +8,7 @@ module.exports = `
       getAllCategories: [Category!]!
       getSubcategoryById(id: ID!): Subcategory
 
-      getAllThreadsInSubcategory(id: ID!): [Thread!]
+      getAllThreadsInSubcategory(id: ID! limit: Int = 10 offset: Int = 0): [Thread!]
       getThreadById(id: ID!): Thread!
    }
 
