@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import createThreadMutation from '../../../gql-queries/createThread'
 import useForm from '../../../hooks/useForm'
-import getThreads from '../../../gql-queries/getAllThreadsInSubcategory'
 import getTotalThreadsInSubcategory from '../../../gql-queries/getTotalThreadsInSubcategory'
 import Spinner from '../../UI/Spinner/Spinner'
 import formatErrors from '../../../utils/formatErrors'
@@ -33,11 +32,16 @@ const CreateThread = ({
       e.preventDefault()
       createThread({
          variables: { ...formState, subcategory_id: id },
-         update: (store, { data: { createThread: thread } }) => {
-            const data = store.readQuery({ query: getTotalThreadsInSubcategory, variables: { id } })
-            if(!data) return
+         update: (cache, { data: { createThread: thread } }) => {
+            const data = cache.readQuery({ query: getTotalThreadsInSubcategory, variables: { id } })
+            if (!data) return
+            Object.keys(cache.data.data).forEach(key =>
+               // @note
+               // Invalidate thread cache so the pagination works properly.
+               key.match(/^Thread/) && cache.data.delete(key)
+            )
             data.getTotalThreadsInSubcategory++;
-            store.writeQuery({ query: getTotalThreadsInSubcategory, variables: { id }, data })
+            cache.writeQuery({ query: getTotalThreadsInSubcategory, variables: { id }, data })
          }
       })
    }

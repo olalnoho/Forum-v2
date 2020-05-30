@@ -25,12 +25,9 @@ const Category = ({
          limit: THREADS_PER_PAGE,
          offset: (THREADS_PER_PAGE) * (page - 1)
       },
-      fetchPolicy: 'network-only'
+      // fetchPolicy: 'cache-and-network'
    })
 
-   console.log(totalThreads)
-
-   // console.log((THREADS_PER_PAGE) * (page - 1))
    return (
       <div className="container">
          {queryError && <h2 className="heading-2"> Could not find category. </h2>}
