@@ -12,9 +12,9 @@ exports.resolver = {
 }
 
 class Category {
-   constructor({ title, id }, ctx) {
+   constructor(category, ctx) {
       Object.assign(this, {
-         title, id, ctx
+         ...category, ctx
       })
    }
    async subcategories() {

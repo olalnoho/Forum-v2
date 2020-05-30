@@ -561,17 +561,6 @@ textarea {
   font-size: 1.4rem;
 }
 
-.subsection__pagination {
-  padding: 0.4rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  background-color: #303333;
-}
-
 .subsection__threads {
   background-color: #282a2a;
   font-size: 1.4rem;

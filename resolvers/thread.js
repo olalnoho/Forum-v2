@@ -63,9 +63,9 @@ exports.resolver = {
 }
 
 class Thread {
-   constructor(entity, ctx) {
+   constructor(thread, ctx) {
       Object.assign(this, {
-         ...entity, ctx
+         ...thread, ctx
       })
    }
 

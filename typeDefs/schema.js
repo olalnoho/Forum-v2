@@ -11,6 +11,9 @@ module.exports = `
       getAllThreadsInSubcategory(id: ID! limit: Int = 10 offset: Int = 0): [Thread!]
       getTotalThreadsInSubcategory(id: ID!): Int!
       getThreadById(id: ID!): Thread!
+
+      getPostsByThreadId(id: ID! limit: Int = 10 offset: Int = 0): [Post!]
+      getTotalPostsInThread(id: ID!): Int!
    }
 
    type Mutation {
@@ -18,6 +21,10 @@ module.exports = `
       loginUser(username: String! password: String!): Auth!
       createThread(title: String! content: String! subcategory_id: ID!): ThreadCreate!
       createPost(content: String! thread_id: ID!): Boolean!
+   }
+
+   type PostNum {
+      num: Int!
    }
 
    type User {

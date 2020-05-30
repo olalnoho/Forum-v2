@@ -27,8 +27,6 @@ const Category = ({
       },
    })
 
-   // subsection__pagination
-
    return (
       <div className="container">
          {queryError && <h2 className="heading-2"> Could not find category. </h2>}

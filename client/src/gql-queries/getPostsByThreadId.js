@@ -1,14 +1,12 @@
 import { gql } from 'apollo-boost'
 
 export default gql`
-   query($id: ID!) {
-      getThreadById(id: $id) {
+   query($id: ID! $limit: Int $offset: Int){
+      getPostsByThreadId(id: $id, limit: $limit, offset: $offset ) {
          id,
-         title,
          content,
          created_at,
-         subcategory_id,
-         creator {
+         user {
             id,
             username
          }

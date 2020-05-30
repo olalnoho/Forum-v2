@@ -1,9 +1,10 @@
 import React from 'react'
 import { useLocation, Link } from 'react-router-dom'
 
-const PageNavigator = ({ page, perPage, total }) => {
+const PageNavigator = ({ page, perPage, total, top, bottom }) => {
    const location = useLocation()
    const numPages = Math.ceil(total / perPage)
+   // if (numPages <= 1) return <div className="paginator"> </div>
    if (!page) page = 1
    return (
       <div className="paginator">
@@ -27,13 +28,18 @@ const PageNavigator = ({ page, perPage, total }) => {
 }
 
 const Paginator = ({
-   page, perPage, total, children
+   page, 
+   perPage, 
+   total, 
+   children,
+   top = true,
+   bottom = true,
 }) => {
    return (
       <>
-         <PageNavigator page={page} perPage={perPage} total={total} />
+         {top && <PageNavigator page={page} perPage={perPage} total={total} />}
          {children}
-         <PageNavigator page={page} perPage={perPage} total={total} />
+         {bottom && <PageNavigator page={page} perPage={perPage} total={total} />}
       </>
    )
 }
