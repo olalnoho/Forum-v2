@@ -528,22 +528,19 @@ textarea {
   background-color: #303333;
 }
 
-.subsection__pagination span {
+.subsection__pagination a {
   cursor: pointer;
   font-size: 1.2rem;
-  margin-right: 0.4rem;
   border: 0.4px solid white;
   padding: 0.7rem 0.9rem;
   background-color: #171919;
-  -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
 }
 
-.subsection__pagination span.active {
+.subsection__pagination a.active {
   background-color: crimson;
 }
 
-.subsection__pagination span:hover {
+.subsection__pagination a:hover {
   background-color: crimson;
 }
 
@@ -551,6 +548,12 @@ textarea {
   font-weight: bold;
   font-size: 1.4rem;
   margin-left: 1rem;
+}
+
+.subsection__pagination__prev {
+  font-weight: bold;
+  font-size: 1.4rem;
+  margin-right: 1rem;
 }
 
 .subsection__threads {
