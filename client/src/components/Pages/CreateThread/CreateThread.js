@@ -32,14 +32,14 @@ const CreateThread = ({
       e.preventDefault()
       createThread({
          variables: { ...formState, subcategory_id: id },
-         update: (cache, { data: { createThread: thread } }) => {
-            const data = cache.readQuery({ query: getTotalThreadsInSubcategory, variables: { id } })
-            if (!data) return
+         update: cache => {
             Object.keys(cache.data.data).forEach(key =>
                // @note
                // Invalidate thread cache so the pagination works properly.
                key.match(/^Thread/) && cache.data.delete(key)
             )
+            const data = cache.readQuery({ query: getTotalThreadsInSubcategory, variables: { id } })
+            if (!data) return
             data.getTotalThreadsInSubcategory++;
             cache.writeQuery({ query: getTotalThreadsInSubcategory, variables: { id }, data })
          }

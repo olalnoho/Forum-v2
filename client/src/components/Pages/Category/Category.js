@@ -1,15 +1,15 @@
-import React, { useContext  } from 'react'
+import React, { useContext } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import queryString from 'query-string'
 import { AuthContext } from '../../../contexts/AuthContext'
 import { Link } from 'react-router-dom'
 import Thread from './Thread'
-import Paginator from './Paginator'
+import Paginator from '../../UI/Paginator/Paginator'
 import getSubcatgoryAndThreads from '../../../gql-queries/getSubcatgoryAndThreads'
 import getThreads from '../../../gql-queries/getAllThreadsInSubcategory'
 import getTotalThreads from '../../../gql-queries/getTotalThreadsInSubcategory'
 
-const THREADS_PER_PAGE = 2
+const THREADS_PER_PAGE = 5
 
 const Category = ({
    match: { params: { id } },
@@ -25,8 +25,9 @@ const Category = ({
          limit: THREADS_PER_PAGE,
          offset: (THREADS_PER_PAGE) * (page - 1)
       },
-      // fetchPolicy: 'cache-and-network'
    })
+
+   // subsection__pagination
 
    return (
       <div className="container">
@@ -45,11 +46,28 @@ const Category = ({
             <div className="subsection__new">
                <Link className="btn btn--primary" to={isAuth ? `${currentUrl}/create` : '/register'}>Start a new Topic</Link>
             </div>
-            {!totalThreadsLoading && <Paginator
-               totalThreads={totalThreads.getTotalThreadsInSubcategory}
-               page={page}
-               theadsPerPage={THREADS_PER_PAGE}
-            />}
+            {!totalThreadsLoading &&
+               <Paginator total={totalThreads.getTotalThreadsInSubcategory} page={page} perPage={THREADS_PER_PAGE} >
+                  <div className="subsection__threads">
+                     {threads && threads.getAllThreadsInSubcategory.length > 0 ?
+                        <ol>
+                           {threads.getAllThreadsInSubcategory.map((x, i) => <Thread key={i} thread={x} />)}
+                        </ol> :
+                        (!page || page < 2) && <h3 className="heading-3">No threads have been created here yet.</h3>
+                     }
+                  </div>
+               </Paginator>
+            }
+         </div>}
+      </div>
+   )
+}
+
+export default Category
+
+
+/*
+
             <div className="subsection__threads">
                {threads && threads.getAllThreadsInSubcategory.length > 0 ?
                   <ol>
@@ -58,14 +76,4 @@ const Category = ({
                   (!page || page < 2) && <h3 className="heading-3">No threads have been created here yet.</h3>
                }
             </div>
-            {totalThreads && <Paginator
-               totalThreads={totalThreads.getTotalThreadsInSubcategory}
-               page={page}
-               theadsPerPage={THREADS_PER_PAGE}
-            />}
-         </div>}
-      </div>
-   )
-}
-
-export default Category
+*/

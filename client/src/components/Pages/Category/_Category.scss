@@ -35,31 +35,6 @@
       display: flex;
       align-items: center;
       background-color: $light-main;
-      a {
-         cursor: pointer;
-         font-size: 1.2rem;
-         border: 0.4px solid white;
-         padding: 0.7rem 0.9rem;
-         background-color: $dark-main;
-         // transition: all 0.3s ease;
-      }
-      a.active {
-         background-color: crimson;
-      }
-      a:hover {
-         background-color: crimson;
-      }
-      &__next {
-         font-weight: bold;
-         font-size: 1.4rem;
-         margin-left: 1rem;
-      }
-      
-      &__prev {
-         font-weight: bold;
-         font-size: 1.4rem;
-         margin-right: 1rem;
-      }
    }
 
    &__threads {
