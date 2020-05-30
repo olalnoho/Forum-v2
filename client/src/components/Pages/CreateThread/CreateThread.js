@@ -33,7 +33,8 @@ const CreateThread = ({
       createThread({
          variables: { ...formState, subcategory_id: id },
          update: (store, { data: { createThread: thread } }) => {
-            const storeData = store.readQuery({ query: getThreads, variables: { id } })
+            console.log('ran')
+            const storeData = store.readQuery({ query: getThreads, variables: { id, limit: 2, offset: 0 } })
             if (!storeData) return
             Object.assign(thread, {
                created_at: new Date(),
@@ -42,7 +43,7 @@ const CreateThread = ({
             })
             const oldThreads = (storeData.getAllThreadsInSubcategory || [])
             storeData.getAllThreadsInSubcategory = [thread, ...oldThreads]
-            store.writeQuery({ query: getThreads, variables: { id }, data: storeData })
+            store.writeQuery({ query: getThreads, variables: { id, limit: 2, offset: 0 }, data: storeData })
          }
       })
    }

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext  } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import queryString from 'query-string'
 import { AuthContext } from '../../../contexts/AuthContext'
@@ -7,6 +7,7 @@ import Thread from './Thread'
 import Paginator from './Paginator'
 import getSubcatgoryAndThreads from '../../../gql-queries/getSubcatgoryAndThreads'
 import getThreads from '../../../gql-queries/getAllThreadsInSubcategory'
+import getTotalThreads from '../../../gql-queries/getTotalThreadsInSubcategory'
 
 const THREADS_PER_PAGE = 2
 
@@ -17,6 +18,7 @@ const Category = ({
    const page = queryString.parse(search).page
    const { isAuth } = useContext(AuthContext)
    const { data, error: queryError } = useQuery(getSubcatgoryAndThreads, { variables: { id } })
+   const { data: totalThreads, loading: totalThreadsLoading } = useQuery(getTotalThreads, { variables: { id } })
    const { data: threads } = useQuery(getThreads, {
       variables: {
          id,
@@ -24,7 +26,6 @@ const Category = ({
          offset: (THREADS_PER_PAGE) * (page - 1)
       }
    })
-
    return (
       <div className="container">
          {queryError && <h2 className="heading-2"> Could not find category. </h2>}
@@ -42,16 +43,24 @@ const Category = ({
             <div className="subsection__new">
                <Link className="btn btn--primary" to={isAuth ? `${currentUrl}/create` : '/register'}>Start a new Topic</Link>
             </div>
-            <Paginator  page={page} />
+            {!totalThreadsLoading && <Paginator
+               totalThreads={totalThreads.getTotalThreadsInSubcategory}
+               page={page}
+               theadsPerPage={THREADS_PER_PAGE}
+            />}
             <div className="subsection__threads">
                {threads && threads.getAllThreadsInSubcategory.length > 0 ?
                   <ol>
                      {threads.getAllThreadsInSubcategory.map((x, i) => <Thread key={i} thread={x} />)}
                   </ol> :
-                  (!page || page < 2) && <h3 className="heading-3">No threads have been created here yet.</h3> 
+                  (!page || page < 2) && <h3 className="heading-3">No threads have been created here yet.</h3>
                }
             </div>
-            <Paginator  page={page} />
+            {totalThreads && <Paginator
+               totalThreads={totalThreads.getTotalThreadsInSubcategory}
+               page={page}
+               theadsPerPage={THREADS_PER_PAGE}
+            />}
          </div>}
       </div>
    )

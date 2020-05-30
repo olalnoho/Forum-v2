@@ -10,10 +10,20 @@ exports.resolver = {
             .orderBy('updated_at', 'desc')
             .limit(limit)
             .offset(offset)
-            
+
          return threads.map(t => new Thread(t, ctx))
       } catch (err) {
          console.log('Error getting threads in subcategory')
+         throw new Error(err)
+      }
+   },
+
+   async getTotalThreadsInSubcategory({ id }, ctx) {
+      try {
+         const [n] = await ctx.db('thread').count('*').where({ subcategory_id: id })
+         return n['count(*)']
+      } catch (err) {
+         console.log('Error getting total number of thread in sc')
          throw new Error(err)
       }
    },
