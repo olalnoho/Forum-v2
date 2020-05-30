@@ -15,7 +15,7 @@ const Category = ({
    match: { params: { id } },
    location: { pathname: currentUrl, search },
 }) => {
-   const page = queryString.parse(search).page
+   const page = queryString.parse(search).page || 1
    const { isAuth } = useContext(AuthContext)
    const { data, error: queryError } = useQuery(getSubcatgoryAndThreads, { variables: { id } })
    const { data: totalThreads, loading: totalThreadsLoading } = useQuery(getTotalThreads, { variables: { id } })
@@ -24,8 +24,13 @@ const Category = ({
          id,
          limit: THREADS_PER_PAGE,
          offset: (THREADS_PER_PAGE) * (page - 1)
-      }
+      },
+      fetchPolicy: 'network-only'
    })
+
+   console.log(totalThreads)
+
+   // console.log((THREADS_PER_PAGE) * (page - 1))
    return (
       <div className="container">
          {queryError && <h2 className="heading-2"> Could not find category. </h2>}
