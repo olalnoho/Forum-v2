@@ -24,7 +24,7 @@ const Thread = ({
    location
 }) => {
    const page = (queryString.parse(location.search).page || 1)
-   const { formState, inputHandler, clearInput } = useForm({ content: '' })
+   const { formState, inputHandler, clearInput, setInput } = useForm({ content: '' })
    const { data: threadData, error: threadError } = useQuery(getThreadById, { variables: { id } })
    const { data: totalPosts, error: totalPostsError, loading: totalPostsLoading } = useQuery(getTotalPosts, { variables: { id } })
    const { data: postData, loading: loadingPosts, error: postsError } = useQuery(getPosts, {
@@ -46,6 +46,11 @@ const Thread = ({
    useEffect(() => {
       if (window.scrollY > 500) window.scrollTo(0, 200)
    }, [page])
+
+   const citeHandler = (username, content) => {
+      console.log('ran')
+      setInput('content', `[quote="${username}"] ${content} [/quote]`, '\n')
+   }
 
    const submitHandler = async e => {
       e.preventDefault()
@@ -80,6 +85,7 @@ const Thread = ({
             // For updating total posts in subcategory
             const landingData = cache.readQuery({ query: getLandingData })
             if (landingData) {
+               console.log('ran')
                for (const category of landingData.landingInfo) {
                   const subcat = category.subcategories.find(
                      x => x.id === threadData.getThreadById.subcategory_id
@@ -89,8 +95,8 @@ const Thread = ({
                      break
                   }
                }
+               cache.writeQuery({ query: getLandingData, data: landingData })
             }
-            cache.writeQuery({ query: getLandingData, data: landingData })
          }
       })
       clearInput()
@@ -117,7 +123,11 @@ const Thread = ({
                   </div>
                   {!totalPostsLoading && <Paginator page={page} perPage={POSTS_PER_PAGE} total={totalPosts.getTotalPostsInThread}>
                      <div className="threadview__posts">
-                        {(!loadingPosts || postData) ? postData.getPostsByThreadId.map(x => <Post key={x.id} post={x} />) : <Spinner />}
+                        {(!loadingPosts || postData) ?
+                           postData.getPostsByThreadId.map(x =>
+                              <Post citeHandler={citeHandler} key={x.id} post={x} />
+                           ) :
+                           <Spinner />}
                      </div>
                   </Paginator>}
                   <div className="threadview__reply" id="threadreply">
