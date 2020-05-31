@@ -3,7 +3,7 @@ const getUserId = require('../utils/getIdFromToken')
 exports.resolver = {
    async getPostsByThreadId({ id, limit, offset }, ctx) {
       try {
-         const posts = await ctx.db('post')  
+         const posts = await ctx.db('post')
             .where({ thread_id: Number(id) })
             .limit(limit)
             .offset(offset)
@@ -14,7 +14,7 @@ exports.resolver = {
       }
    },
 
-   async getTotalPostsInThread({id}, ctx) {
+   async getTotalPostsInThread({ id }, ctx) {
       try {
          const [n] = await ctx.db('post').count('*').where({ thread_id: Number(id) })
          return n['count(*)']
@@ -34,7 +34,7 @@ exports.resolver = {
             user_id: Number(user_id),
             thread_id: Number(thread_id),
          })
-         return true
+         return new Post({ user_id, content }, ctx)
       } catch (err) {
          console.log('Error inserting post')
          throw new Error(err)

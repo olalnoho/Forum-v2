@@ -20,7 +20,7 @@ module.exports = `
       registerUser(email: String! username: String! password: String!): Auth!
       loginUser(username: String! password: String!): Auth!
       createThread(title: String! content: String! subcategory_id: ID!): ThreadCreate!
-      createPost(content: String! thread_id: ID!): Boolean!
+      createPost(content: String! thread_id: ID!): PostCreate!
    }
 
    type PostNum {
@@ -78,6 +78,11 @@ module.exports = `
       content: String!
       created_at: String!
       user: User
+   }
+
+   type PostCreate {
+      content: String!
+      user: User!
    }
 
    type LandingCategoryInfo {

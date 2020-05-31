@@ -9,7 +9,7 @@ import getSubcatgoryAndThreads from '../../../gql-queries/getSubcatgoryAndThread
 import getThreads from '../../../gql-queries/getAllThreadsInSubcategory'
 import getTotalThreads from '../../../gql-queries/getTotalThreadsInSubcategory'
 
-const THREADS_PER_PAGE = 5
+const THREADS_PER_PAGE = 10
 
 const Category = ({
    match: { params: { id } },

@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
-// import { Link } from 'react-router-dom'
 import { useMutation } from '@apollo/react-hooks'
-import createThreadMutation from '../../../gql-queries/createThread'
 import useForm from '../../../hooks/useForm'
+
+import createThreadMutation from '../../../gql-queries/createThread'
 import getTotalThreadsInSubcategory from '../../../gql-queries/getTotalThreadsInSubcategory'
+
 import Spinner from '../../UI/Spinner/Spinner'
+
 import formatErrors from '../../../utils/formatErrors'
+import clearCache from '../../../utils/clearCache'
 
 const CreateThread = ({
    match: { params: { id } },
@@ -33,11 +36,12 @@ const CreateThread = ({
       createThread({
          variables: { ...formState, subcategory_id: id },
          update: cache => {
-            Object.keys(cache.data.data).forEach(key =>
-               // @note
-               // Invalidate thread cache so the pagination works properly.
-               key.match(/^Thread/) && cache.data.delete(key)
-            )
+            // Object.keys(cache.data.data).forEach(key =>
+            //    // @note
+            //    // Invalidate thread cache so the pagination works properly.
+            //    key.match(/^Thread/) && cache.data.delete(key)
+            // )
+            clearCache('Thread')(cache)
             const data = cache.readQuery({ query: getTotalThreadsInSubcategory, variables: { id } })
             if (!data) return
             data.getTotalThreadsInSubcategory++;
