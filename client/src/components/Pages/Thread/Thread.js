@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import queryString from 'query-string'
 import { useQuery, useMutation } from '@apollo/react-hooks'
-import formatDate from '../../../utils/formatDate'
 
 import Paginator from '../../UI/Paginator/Paginator'
 import Spinner from '../../UI/Spinner/Spinner'
@@ -14,7 +13,9 @@ import getThreadById from '../../../gql-queries/getThreadById'
 import getLandingData from '../../../gql-queries/getLandingData'
 import getPosts from '../../../gql-queries/getPostsByThreadId'
 import getTotalPosts from '../../../gql-queries/getTotalPostsInThread'
-import getAllThreadsInSubcategory from '../../../gql-queries/getAllThreadsInSubcategory'
+
+import formatDate from '../../../utils/formatDate'
+import clearCache from '../../../utils/clearCache'
 
 const POSTS_PER_PAGE = 10
 
@@ -48,29 +49,20 @@ const Thread = ({
 
    const submitHandler = async e => {
       e.preventDefault()
-      // @note
-      // refetching getLandingData and getSubcategoryById
-      // is only for post count - make better dawg.
       if (!formState.content.trim()) return
       await createPostMutation({
          variables: { thread_id: id, ...formState },
          refetchQueries: [
             {
-               query: getLandingData
-            },
-            {
                query: getPosts, variables: { id, limit: POSTS_PER_PAGE, offset: POSTS_PER_PAGE * (page - 1) }
             },
-            {
-               query: getAllThreadsInSubcategory, variables: {
-                  id: threadData.getThreadById.subcategory_id,
-                  limit: 10,
-                  offset: 0
-               }
-            }
          ],
          awaitRefetchQueries: true,
          update: (cache, { data: { createPost: post } }) => {
+            // @note
+            // clearing the cache for updated order on category oage
+            // and correct paging.
+            clearCache('Thread')(cache)
 
             // @note
             // updating total posts for getting the correct number of pages.
@@ -83,6 +75,22 @@ const Thread = ({
                totalPosts.getTotalPostsInThread++
                cache.writeQuery({ query: getTotalPosts, variables: { id }, data: totalPosts })
             }
+
+            // @note
+            // For updating total posts in subcategory
+            const landingData = cache.readQuery({ query: getLandingData })
+            if (landingData) {
+               for (const category of landingData.landingInfo) {
+                  const subcat = category.subcategories.find(
+                     x => x.id === threadData.getThreadById.subcategory_id
+                  )
+                  if (subcat) {
+                     subcat.postcount++
+                     break
+                  }
+               }
+            }
+            cache.writeQuery({ query: getLandingData, data: landingData })
          }
       })
       clearInput()
